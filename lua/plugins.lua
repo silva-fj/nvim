@@ -11,6 +11,13 @@ end
 
 local packer_bootstrap = ensure_packer()
 
+vim.cmd([[
+  augroup packer_user_config
+    autocmd!
+    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+  augroup end
+]])
+
 return require('packer').startup(function(use)
     -- Packer can manage itself
     use 'wbthomason/packer.nvim'
@@ -28,19 +35,6 @@ return require('packer').startup(function(use)
     use {
         'nvim-telescope/telescope.nvim', tag = '0.1.0',
         requires = { { 'nvim-lua/plenary.nvim' } },
-        config = function()
-            require('telescope').setup({
-                defaults = {
-                    mappings = {
-                        i = { ['<esc>'] = require('telescope.actions').close }
-                    },
-                    layout_config = {
-                        vertical = { width = 0.6 }
-                    }
-                }
-            })
-            require('telescope').load_extension('fzf')
-        end
     }
     use {
         'VonHeikemen/lsp-zero.nvim',
@@ -95,6 +89,7 @@ return require('packer').startup(function(use)
             require 'alpha'.setup(require 'alpha.themes.startify'.config)
         end
     }
+    -- Comments
     use 'numToStr/Comment.nvim'
     use 'JoosepAlviste/nvim-ts-context-commentstring'
     use {
