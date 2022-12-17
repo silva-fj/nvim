@@ -79,7 +79,12 @@ return require('packer').startup(function(use)
         config = function() require('lualine').setup() end
     }
     use { 'nvim-tree/nvim-tree.lua', requires = { 'nvim-tree/nvim-web-devicons' } }
-    use { 'akinsho/bufferline.nvim', tag = "v3.*", requires = 'nvim-tree/nvim-web-devicons' }
+    use {
+        'akinsho/bufferline.nvim',
+        tag = "v3.*",
+        requires = 'nvim-tree/nvim-web-devicons',
+        config = function() require("bufferline").setup() end
+    }
     use 'tpope/vim-fugitive'
 
     if packer_bootstrap then
