@@ -21,3 +21,7 @@ set.updatetime = 300
 
 vim.opt.clipboard = { "unnamed", "unnamedplus" }
 vim.opt.wildignore = { "*/temp/*", "*.so", "*.zip", "*/node_modules/*", "*/vendor/bundle/*", "*/vendor/*" }
+
+-- disable netrw
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1

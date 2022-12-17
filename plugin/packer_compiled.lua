@@ -151,15 +151,20 @@ _G.packer_plugins = {
     path = "/Users/franjs/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
   },
+  ["nvim-tree.lua"] = {
+    loaded = true,
+    path = "/Users/franjs/.local/share/nvim/site/pack/packer/start/nvim-tree.lua",
+    url = "https://github.com/nvim-tree/nvim-tree.lua"
+  },
   ["nvim-treesitter"] = {
     loaded = true,
     path = "/Users/franjs/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
   },
   ["nvim-web-devicons"] = {
-    loaded = false,
-    needs_bufread = false,
-    path = "/Users/franjs/.local/share/nvim/site/pack/packer/opt/nvim-web-devicons",
+    config = { "\27LJ\2\nO\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\1\fdefault\2\nsetup\22nvim-web-devicons\frequire\0" },
+    loaded = true,
+    path = "/Users/franjs/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
     url = "https://github.com/kyazdani42/nvim-web-devicons"
   },
   ["packer.nvim"] = {
@@ -205,6 +210,10 @@ time([[Defining packer_plugins]], false)
 time([[Config for fidget.nvim]], true)
 try_loadstring("\27LJ\2\n4\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\vfidget\frequire\0", "config", "fidget.nvim")
 time([[Config for fidget.nvim]], false)
+-- Config for: nvim-web-devicons
+time([[Config for nvim-web-devicons]], true)
+try_loadstring("\27LJ\2\nO\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\1\fdefault\2\nsetup\22nvim-web-devicons\frequire\0", "config", "nvim-web-devicons")
+time([[Config for nvim-web-devicons]], false)
 -- Config for: lualine.nvim
 time([[Config for lualine.nvim]], true)
 try_loadstring("\27LJ\2\n5\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\flualine\frequire\0", "config", "lualine.nvim")

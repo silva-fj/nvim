@@ -68,8 +68,6 @@ return require('packer').startup(function(use)
             { 'rafamadriz/friendly-snippets' },
         }
     }
-
-    -- LSP status
     use {
         'j-hui/fidget.nvim',
         config = function() require('fidget').setup() end
@@ -85,6 +83,18 @@ return require('packer').startup(function(use)
         'nvim-lualine/lualine.nvim',
         requires = { 'kyazdani42/nvim-web-devicons', opt = true },
         config = function() require('lualine').setup() end
+    }
+
+    use {
+        'kyazdani42/nvim-web-devicons',
+        config = function() require('nvim-web-devicons').setup({ default = true }) end
+    }
+
+    use {
+        'nvim-tree/nvim-tree.lua',
+        requires = {
+            'nvim-tree/nvim-web-devicons',
+        },
     }
 
     use 'tpope/vim-fugitive'
