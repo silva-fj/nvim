@@ -14,10 +14,8 @@ local packer_bootstrap = ensure_packer()
 return require('packer').startup(function(use)
     -- Packer can manage itself
     use 'wbthomason/packer.nvim'
-
     -- Colorschemes
     use 'Mofiqul/vscode.nvim'
-
     use {
         'nvim-treesitter/nvim-treesitter',
         run = function()
@@ -25,7 +23,6 @@ return require('packer').startup(function(use)
             ts_update()
         end,
     }
-
     -- Fuzzy finder
     use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
     use {
@@ -45,7 +42,6 @@ return require('packer').startup(function(use)
             require('telescope').load_extension('fzf')
         end
     }
-
     use {
         'VonHeikemen/lsp-zero.nvim',
         requires = {
@@ -72,30 +68,21 @@ return require('packer').startup(function(use)
         'j-hui/fidget.nvim',
         config = function() require('fidget').setup() end
     }
-
     use 'christoomey/vim-tmux-navigator'
-
-    if packer_bootstrap then
-        require('packer').sync()
-    end
-
+    use {
+        'nvim-tree/nvim-web-devicons',
+        config = function() require('nvim-web-devicons').setup({ default = true }) end
+    }
     use {
         'nvim-lualine/lualine.nvim',
         requires = { 'kyazdani42/nvim-web-devicons', opt = true },
         config = function() require('lualine').setup() end
     }
-
-    use {
-        'kyazdani42/nvim-web-devicons',
-        config = function() require('nvim-web-devicons').setup({ default = true }) end
-    }
-
-    use {
-        'nvim-tree/nvim-tree.lua',
-        requires = {
-            'nvim-tree/nvim-web-devicons',
-        },
-    }
-
+    use { 'nvim-tree/nvim-tree.lua', requires = { 'nvim-tree/nvim-web-devicons' } }
+    use { 'akinsho/bufferline.nvim', tag = "v3.*", requires = 'nvim-tree/nvim-web-devicons' }
     use 'tpope/vim-fugitive'
+
+    if packer_bootstrap then
+        require('packer').sync()
+    end
 end)
