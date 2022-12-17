@@ -88,6 +88,13 @@ return require('packer').startup(function(use)
     use 'tpope/vim-fugitive'
     use 'lewis6991/gitsigns.nvim'
     use 'lukas-reineke/indent-blankline.nvim'
+    use {
+        'goolord/alpha-nvim',
+        requires = { 'nvim-tree/nvim-web-devicons' },
+        config = function()
+            require 'alpha'.setup(require 'alpha.themes.startify'.config)
+        end
+    }
 
     if packer_bootstrap then
         require('packer').sync()
