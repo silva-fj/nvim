@@ -29,10 +29,10 @@ return require('packer').startup(function(use)
         'nvim-telescope/telescope.nvim', tag = '0.1.0',
         requires = { { 'nvim-lua/plenary.nvim' } },
         config = function()
-            require("telescope").setup({
+            require('telescope').setup({
                 defaults = {
                     mappings = {
-                        i = { ["<esc>"] = require("telescope.actions").close }
+                        i = { ['<esc>'] = require('telescope.actions').close }
                     },
                     layout_config = {
                         vertical = { width = 0.6 }
@@ -81,12 +81,13 @@ return require('packer').startup(function(use)
     use { 'nvim-tree/nvim-tree.lua', requires = { 'nvim-tree/nvim-web-devicons' } }
     use {
         'akinsho/bufferline.nvim',
-        tag = "v3.*",
+        tag = 'v3.*',
         requires = 'nvim-tree/nvim-web-devicons',
-        config = function() require("bufferline").setup() end
+        config = function() require('bufferline').setup() end
     }
     use 'tpope/vim-fugitive'
     use 'lewis6991/gitsigns.nvim'
+    use 'lukas-reineke/indent-blankline.nvim'
 
     if packer_bootstrap then
         require('packer').sync()
