@@ -95,6 +95,15 @@ return require('packer').startup(function(use)
             require 'alpha'.setup(require 'alpha.themes.startify'.config)
         end
     }
+    use 'numToStr/Comment.nvim'
+    use 'JoosepAlviste/nvim-ts-context-commentstring'
+    use {
+        "folke/todo-comments.nvim",
+        requires = "nvim-lua/plenary.nvim",
+        config = function()
+            require("todo-comments").setup()
+        end
+    }
 
     if packer_bootstrap then
         require('packer').sync()
