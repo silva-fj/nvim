@@ -67,6 +67,24 @@ require("packer").startup(function(use)
 			require("trouble").setup()
 		end,
 	})
+
+	-- Git
+	use("tpope/vim-fugitive")
+	use("tpope/vim-rhubarb")
+	use("lewis6991/gitsigns.nvim")
+	use("kdheepak/lazygit.nvim")
+
+	-- Comments
+	use("numToStr/Comment.nvim")
+	use("JoosepAlviste/nvim-ts-context-commentstring")
+	use({
+		"folke/todo-comments.nvim",
+		requires = "nvim-lua/plenary.nvim",
+		config = function()
+			require("todo-comments").setup()
+		end,
+	})
+
 	use("christoomey/vim-tmux-navigator")
 	use({
 		"nvim-tree/nvim-web-devicons",
@@ -90,26 +108,12 @@ require("packer").startup(function(use)
 			require("bufferline").setup()
 		end,
 	})
-	-- Git
-	use("tpope/vim-fugitive")
-	use("tpope/vim-rhubarb")
-	use("lewis6991/gitsigns.nvim")
 	use("lukas-reineke/indent-blankline.nvim")
 	use({
 		"goolord/alpha-nvim",
 		requires = { "nvim-tree/nvim-web-devicons" },
 		config = function()
 			require("alpha").setup(require("alpha.themes.startify").config)
-		end,
-	})
-	-- Comments
-	use("numToStr/Comment.nvim")
-	use("JoosepAlviste/nvim-ts-context-commentstring")
-	use({
-		"folke/todo-comments.nvim",
-		requires = "nvim-lua/plenary.nvim",
-		config = function()
-			require("todo-comments").setup()
 		end,
 	})
 	use({
@@ -125,7 +129,6 @@ require("packer").startup(function(use)
 			require("goto-preview").setup()
 		end,
 	})
-	use("kdheepak/lazygit.nvim")
 	use({
 		"windwp/nvim-ts-autotag",
 		config = function()
