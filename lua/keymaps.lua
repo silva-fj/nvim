@@ -1,3 +1,6 @@
+-- See `:help vim.keymap.set()`
+vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
+
 local map = vim.api.nvim_set_keymap
 
 map("", "<space>", "<leader>", {})

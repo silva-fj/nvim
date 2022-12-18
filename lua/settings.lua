@@ -25,3 +25,11 @@ vim.opt.wildignore = { "*/temp/*", "*.so", "*.zip", "*/node_modules/*", "*/vendo
 -- disable netrw
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
+
+-- [[ Setting options ]]
+-- See `:help vim.o`
+
+-- Set highlight on search
+vim.o.hlsearch = false
+-- Save undo history
+vim.o.undofile = true
