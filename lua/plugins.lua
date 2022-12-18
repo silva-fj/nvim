@@ -123,6 +123,14 @@ return require("packer").startup(function(use)
 			require("nvim-autopairs").setup()
 		end,
 	})
+	use("tpope/vim-surround")
+	use({
+		"rmagatti/goto-preview",
+		config = function()
+			require("goto-preview").setup()
+		end,
+	})
+	use("kdheepak/lazygit.nvim")
 
 	if packer_bootstrap then
 		require("packer").sync()
