@@ -67,6 +67,13 @@ return require("packer").startup(function(use)
 			require("fidget").setup()
 		end,
 	})
+	use({
+		"folke/trouble.nvim",
+		requires = "kyazdani42/nvim-web-devicons",
+		config = function()
+			require("trouble").setup()
+		end,
+	})
 	use("christoomey/vim-tmux-navigator")
 	use({
 		"nvim-tree/nvim-web-devicons",
