@@ -14,8 +14,11 @@ local packer_bootstrap = ensure_packer()
 require("packer").startup(function(use)
 	-- Packer can manage itself
 	use("wbthomason/packer.nvim")
+
 	-- Colorschemes
 	use("Mofiqul/vscode.nvim")
+	use("ellisonleao/gruvbox.nvim")
+	use("mhartington/oceanic-next")
 	use({
 		"nvim-treesitter/nvim-treesitter",
 		run = function()
@@ -23,6 +26,7 @@ require("packer").startup(function(use)
 			ts_update()
 		end,
 	})
+	use("RRethy/vim-illuminate")
 	-- Fuzzy finder
 	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
 	use({
