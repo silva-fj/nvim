@@ -131,6 +131,12 @@ return require("packer").startup(function(use)
 		end,
 	})
 	use("kdheepak/lazygit.nvim")
+    use ({
+        'windwp/nvim-ts-autotag',
+        config = function ()
+            require("nvim-ts-autotag").setup()
+        end
+    })
 
 	if packer_bootstrap then
 		require("packer").sync()
