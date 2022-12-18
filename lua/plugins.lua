@@ -11,14 +11,7 @@ end
 
 local packer_bootstrap = ensure_packer()
 
-vim.cmd([[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
-  augroup end
-]])
-
-return require("packer").startup(function(use)
+require("packer").startup(function(use)
 	-- Packer can manage itself
 	use("wbthomason/packer.nvim")
 	-- Colorschemes
@@ -61,7 +54,7 @@ return require("packer").startup(function(use)
 	})
 	use("jose-elias-alvarez/null-ls.nvim")
 	use("jayp0521/mason-null-ls.nvim")
-	use({
+	use({ -- Useful status updates for LSP
 		"j-hui/fidget.nvim",
 		config = function()
 			require("fidget").setup()
@@ -97,7 +90,9 @@ return require("packer").startup(function(use)
 			require("bufferline").setup()
 		end,
 	})
+	-- Git
 	use("tpope/vim-fugitive")
+	use("tpope/vim-rhubarb")
 	use("lewis6991/gitsigns.nvim")
 	use("lukas-reineke/indent-blankline.nvim")
 	use({
@@ -131,14 +126,30 @@ return require("packer").startup(function(use)
 		end,
 	})
 	use("kdheepak/lazygit.nvim")
-    use ({
-        'windwp/nvim-ts-autotag',
-        config = function ()
-            require("nvim-ts-autotag").setup()
-        end
-    })
+	use({
+		"windwp/nvim-ts-autotag",
+		config = function()
+			require("nvim-ts-autotag").setup()
+		end,
+	})
 
 	if packer_bootstrap then
 		require("packer").sync()
 	end
 end)
+
+if packer_bootstrap then
+	print("==================================")
+	print("    Plugins are being installed")
+	print("    Wait until Packer completes,")
+	print("       then restart nvim")
+	print("==================================")
+	return
+end
+
+vim.cmd([[
+  augroup packer_user_config
+    autocmd!
+    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+  augroup end
+]])
