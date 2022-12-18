@@ -147,9 +147,10 @@ if packer_bootstrap then
 	return
 end
 
-vim.cmd([[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
-  augroup end
-]])
+-- Automatically source and re-compile packer whenever you save this init.lua
+local packer_group = vim.api.nvim_create_augroup('Packer', { clear = true })
+vim.api.nvim_create_autocmd('BufWritePost', {
+  command = 'source <afile> | PackerCompile',
+  group = packer_group,
+  pattern = vim.fn.expand '$MYVIMRC',
+})
