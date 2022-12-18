@@ -36,10 +36,10 @@ return require('packer').startup(function(use)
         'nvim-telescope/telescope.nvim', tag = '0.1.0',
         requires = { { 'nvim-lua/plenary.nvim' } },
     }
+    -- LSP
     use {
         'VonHeikemen/lsp-zero.nvim',
         requires = {
-            -- LSP Support
             { 'neovim/nvim-lspconfig' },
             { 'williamboman/mason.nvim' },
             { 'williamboman/mason-lspconfig.nvim' },
@@ -58,6 +58,8 @@ return require('packer').startup(function(use)
             { 'rafamadriz/friendly-snippets' },
         }
     }
+    use 'jose-elias-alvarez/null-ls.nvim'
+    use 'jayp0521/mason-null-ls.nvim'
     use {
         'j-hui/fidget.nvim',
         config = function() require('fidget').setup() end
