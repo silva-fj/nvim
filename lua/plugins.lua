@@ -141,6 +141,7 @@ require("packer").startup(function(use)
 			require("nvim-lightbulb").setup({ autocmd = { enabled = true } })
 		end,
 	})
+	use("folke/lsp-colors.nvim")
 
 	if packer_bootstrap then
 		require("packer").sync()
