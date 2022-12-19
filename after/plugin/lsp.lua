@@ -42,10 +42,6 @@ lsp.setup_nvim_cmp({
 	mapping = cmp_mappings,
 })
 
-vim.diagnostic.config({
-	virtual_text = true,
-})
-
 -- Fix Undefined global 'vim'
 lsp.configure("sumneko_lua", {
 	settings = {
@@ -58,14 +54,14 @@ lsp.configure("sumneko_lua", {
 })
 
 lsp.configure("tsserver", {
-	on_attach = function(client, bufnr)
+	on_attach = function(client)
 		client.server_capabilities.documentFormattingProvider = false
 		client.server_capabilities.documentRangeFormattingProvider = false
 	end,
 })
 
 lsp.configure("jsonls", {
-	on_attach = function(client, bufnr)
+	on_attach = function(client)
 		client.server_capabilities.documentFormattingProvider = false
 		client.server_capabilities.documentRangeFormattingProvider = false
 	end,
@@ -155,3 +151,12 @@ end)
 lsp.nvim_workspace()
 
 lsp.setup()
+
+vim.diagnostic.config({
+	virtual_text = true,
+	signs = true,
+	update_in_insert = false,
+	underline = true,
+	severity_sort = false,
+	float = true,
+})
