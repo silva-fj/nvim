@@ -46,8 +46,64 @@ vim.diagnostic.config({
 	virtual_text = true,
 })
 
+-- Fix Undefined global 'vim'
+lsp.configure("sumneko_lua", {
+	settings = {
+		Lua = {
+			diagnostics = {
+				globals = { "vim" },
+			},
+		},
+	},
+})
+
+lsp.configure("tsserver", {
+	on_attach = function(client, bufnr)
+		client.server_capabilities.documentFormattingProvider = false
+		client.server_capabilities.documentRangeFormattingProvider = false
+	end,
+})
+
+lsp.configure("jsonls", {
+	on_attach = function(client, bufnr)
+		client.server_capabilities.documentFormattingProvider = false
+		client.server_capabilities.documentRangeFormattingProvider = false
+	end,
+	capabilities = function()
+		local capabilities = vim.lsp.protocol.make_client_capabilities()
+		capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+		return capabilities
+	end,
+	settings = {
+		json = {
+			-- Schemas https://www.schemastore.org
+			schemas = {
+				{ fileMatch = { "package.json" }, url = "https://json.schemastore.org/package.json" },
+				{ fileMatch = { "tsconfig*.json" }, url = "https://json.schemastore.org/tsconfig.json" },
+				{
+					fileMatch = { ".prettierrc", ".prettierrc.json", "prettier.config.json" },
+					url = "https://json.schemastore.org/prettierrc.json",
+				},
+				{ fileMatch = { ".eslintrc", ".eslintrc.json" }, url = "https://json.schemastore.org/eslintrc.json" },
+				{
+					fileMatch = { ".babelrc", ".babelrc.json", "babel.config.json" },
+					url = "https://json.schemastore.org/babelrc.json",
+				},
+				{ fileMatch = { "lerna.json" }, url = "https://json.schemastore.org/lerna.json" },
+				{ fileMatch = { "now.json", "vercel.json" }, url = "https://json.schemastore.org/now.json" },
+				{
+					fileMatch = { ".stylelintrc", ".stylelintrc.json", "stylelint.config.json" },
+					url = "http://json.schemastore.org/stylelintrc.json",
+				},
+			},
+		},
+	},
+})
+
 lsp.on_attach(function(client, bufnr)
 	print("LSP started.")
+	require("illuminate").on_attach(client)
 
 	if client.name == "eslint" then
 		vim.cmd.LspStop("eslint")
@@ -74,16 +130,16 @@ lsp.on_attach(function(client, bufnr)
 	nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
 	nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
 	nmap("gd", vim.lsp.buf.definition, "[G]oto [D]efinition")
-	nmap("gr", function ()
-	   require("telescope.builtin").lsp_references({ layout_strategy = 'vertical' })
+	nmap("gr", function()
+		require("telescope.builtin").lsp_references({ layout_strategy = "vertical" })
 	end, "[G]oto [R]eferences")
 	nmap("gi", vim.lsp.buf.implementation, "[G]oto [I]mplementation")
 	nmap("<leader>D", vim.lsp.buf.type_definition, "Type [D]efinition")
-	nmap("<leader>ds", function ()
-	   require("telescope.builtin").lsp_document_symbols({ layout_strategy = 'vertical' })
+	nmap("<leader>ds", function()
+		require("telescope.builtin").lsp_document_symbols({ layout_strategy = "vertical" })
 	end, "[D]ocument [S]ymbols")
-	nmap("<leader>ws", function ()
-	   require("telescope.builtin").lsp_dynamic_workspace_symbols({ layout_strategy = 'vertical' })
+	nmap("<leader>ws", function()
+		require("telescope.builtin").lsp_dynamic_workspace_symbols({ layout_strategy = "vertical" })
 	end, "[W]orkspace [S]ymbols")
 	nmap("<space>ld", vim.diagnostic.open_float, "[L]ine [D]iagnostic")
 	nmap("ff", "<cmd>Format<CR>", "[F]ormat [F]ile")
