@@ -105,11 +105,6 @@ lsp.on_attach(function(client, bufnr)
 	print("LSP started.")
 	require("illuminate").on_attach(client)
 
-	if client.name == "eslint" then
-		vim.cmd.LspStop("eslint")
-		return
-	end
-
 	-- Create a command `:Format` local to the LSP buffer
 	vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
 		if vim.lsp.buf.format then
