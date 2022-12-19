@@ -56,8 +56,10 @@ require("packer").startup(function(use)
 			{ "rafamadriz/friendly-snippets" },
 		},
 	})
-	use("jose-elias-alvarez/null-ls.nvim")
-	use("jayp0521/mason-null-ls.nvim")
+	use({
+		"jose-elias-alvarez/null-ls.nvim",
+		requires = { "nvim-lua/plenary.nvim" },
+	})
 	use({ -- Useful status updates for LSP
 		"j-hui/fidget.nvim",
 		config = function()
