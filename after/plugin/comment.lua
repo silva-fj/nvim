@@ -4,13 +4,13 @@ require("Comment").setup({
 		---Line-comment toggle keymap
 		line = "<leader>cc",
 		---Block-comment toggle keymap
-		block = "<leader>cb",
+		block = "<leader>bb",
 	},
 	opleader = {
 		---Line-comment keymap
 		line = "<leader>cc",
 		---Block-comment keymap
-		block = "<leader>cb",
+		block = "<leader>bb",
 	},
 	mappings = {
 		extra = false,

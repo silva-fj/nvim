@@ -29,13 +29,13 @@ vim.keymap.set("n", "<leader>b", function()
 	builtin.buffers({ layout_strategy = "vertical" })
 end, { desc = "[ ] Find existing buffers" })
 
-vim.keymap.set("n", "<leader>sh", function()
+vim.keymap.set("n", "<leader>fh", function()
 	builtin.help_tags({ layout_strategy = "vertical" })
 end, { desc = "[S]earch [H]elp" })
 
 vim.keymap.set("n", "<C-p>", function()
 	builtin.git_files({ layout_strategy = "vertical" })
-end, { desc = '[S]earch [G]it files'})
+end, { desc = "[S]earch [G]it files" })
 
 vim.keymap.set("n", "<Leader>f", function()
 	builtin.grep_string({ search = vim.fn.input("Search 🔍 "), layout_strategy = "vertical" })
