@@ -73,6 +73,7 @@ require("packer").startup(function(use)
 			require("trouble").setup()
 		end,
 	})
+	use("ray-x/lsp_signature.nvim")
 
 	-- Git
 	use("tpope/vim-fugitive")

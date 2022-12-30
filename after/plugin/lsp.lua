@@ -100,6 +100,12 @@ lsp.configure("jsonls", {
 lsp.on_attach(function(client, bufnr)
 	print("LSP started.")
 	require("illuminate").on_attach(client)
+	require("lsp_signature").on_attach({
+		bind = true, -- This is mandatory, otherwise border config won't get registered.
+		handler_opts = {
+			border = "rounded",
+		},
+	}, bufnr)
 
 	-- Create a command `:Format` local to the LSP buffer
 	vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
