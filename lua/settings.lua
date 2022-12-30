@@ -32,4 +32,4 @@ vim.g.loaded_netrwPlugin = 1
 -- Set highlight on search
 vim.o.hlsearch = false
 -- Save undo history
-vim.o.undofile = true
+vim.o.undofile = false
