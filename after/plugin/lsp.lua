@@ -60,17 +60,19 @@ lsp.configure("tsserver", {
 	end,
 })
 
+local jsonlsCapabilities = function()
+	local capabilities = vim.lsp.protocol.make_client_capabilities()
+	capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+	return capabilities
+end
+
 lsp.configure("jsonls", {
 	on_attach = function(client)
 		client.server_capabilities.documentFormattingProvider = false
 		client.server_capabilities.documentRangeFormattingProvider = false
 	end,
-	capabilities = function()
-		local capabilities = vim.lsp.protocol.make_client_capabilities()
-		capabilities.textDocument.completion.completionItem.snippetSupport = true
-
-		return capabilities
-	end,
+	capabilities = jsonlsCapabilities(),
 	settings = {
 		json = {
 			-- Schemas https://www.schemastore.org
