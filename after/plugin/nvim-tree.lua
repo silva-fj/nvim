@@ -1,44 +1,93 @@
-vim.api.nvim_set_keymap("n", "<Leader>e", ":NvimTreeToggle<CR>", { noremap = true })
-vim.api.nvim_set_keymap("n", "<Leader>R", ":NvimTreeRefresh<CR>", { noremap = true })
-vim.api.nvim_set_keymap("n", "<Leader>F", ":NvimTreeFindFile<CR>", { noremap = true })
+local lib = require("nvim-tree.lib")
+local view = require("nvim-tree.view")
 
-local tree_cb = require("nvim-tree.config").nvim_tree_callback
+local function collapse_all()
+	require("nvim-tree.actions.tree-modifiers.collapse-all").fn()
+end
+
+local function edit_or_open()
+	-- open as vsplit on current node
+	local action = "edit"
+	local node = lib.get_node_at_cursor()
+
+	-- Just copy what's done normally with vsplit
+	if node.link_to and not node.nodes then
+		require("nvim-tree.actions.node.open-file").fn(action, node.link_to)
+		view.close() -- Close the tree if file was opened
+	elseif node.nodes ~= nil then
+		lib.expand_or_collapse(node)
+	else
+		require("nvim-tree.actions.node.open-file").fn(action, node.absolute_path)
+		view.close() -- Close the tree if file was opened
+	end
+end
+
+local function vsplit_preview()
+	-- open as vsplit on current node
+	local action = "vsplit"
+	local node = lib.get_node_at_cursor()
+
+	-- Just copy what's done normally with vsplit
+	if node.link_to and not node.nodes then
+		require("nvim-tree.actions.node.open-file").fn(action, node.link_to)
+	elseif node.nodes ~= nil then
+		lib.expand_or_collapse(node)
+	else
+		require("nvim-tree.actions.node.open-file").fn(action, node.absolute_path)
+	end
+
+	-- Finally refocus on tree if it was lost
+	view.focus()
+end
+
+local git_add = function()
+	local node = lib.get_node_at_cursor()
+	local gs = node.git_status.file
+
+	-- If the file is untracked, unstaged or partially staged, we stage it
+	if gs == "??" or gs == "MM" or gs == "AM" or gs == " M" then
+		vim.cmd("silent !git add " .. node.absolute_path)
+
+		-- If the file is staged, we unstage
+	elseif gs == "M " or gs == "A " then
+		vim.cmd("silent !git restore --staged " .. node.absolute_path)
+	end
+
+	lib.refresh_tree()
+end
+
+local function copy_file_to(node)
+	local file_src = node["absolute_path"]
+	-- The args of input are {prompt}, {default}, {completion}
+	-- Read in the new file path using the existing file's path as the baseline.
+	local file_out = vim.fn.input("COPY TO: ", file_src, "file")
+	-- Create any parent dirs as required
+	local dir = vim.fn.fnamemodify(file_out, ":h")
+	vim.fn.system({ "mkdir", "-p", dir })
+	-- Copy the file
+	vim.fn.system({ "cp", "-R", file_src, file_out })
+end
+
+-- Automatically open file upon creation
+local api = require("nvim-tree.api")
+api.events.subscribe(api.events.Event.FileCreated, function(file)
+	vim.cmd("edit " .. file.fname)
+end)
 
 local mappingsList = {
-	{ key = { "<CR>", "o", "<2-LeftMouse>", "l" }, cb = tree_cb("edit") },
-	{ key = { "<2-RightMouse>", "<C-]>" }, cb = tree_cb("cd") },
-	{ key = "<C-v>", cb = tree_cb("vsplit") },
-	{ key = "<C-x>", cb = tree_cb("split") },
-	{ key = "<C-t>", cb = tree_cb("tabnew") },
-	{ key = "<", cb = tree_cb("prev_sibling") },
-	{ key = ">", cb = tree_cb("next_sibling") },
-	{ key = "P", cb = tree_cb("parent_node") },
-	{ key = "<BS>", cb = tree_cb("close_node") },
-	{ key = "<S-CR>", cb = tree_cb("close_node") },
-	{ key = "<Tab>", cb = tree_cb("preview") },
-	{ key = "K", cb = tree_cb("first_sibling") },
-	{ key = "J", cb = tree_cb("last_sibling") },
-	{ key = "I", cb = tree_cb("toggle_git_ignored") },
-	{ key = "H", cb = tree_cb("toggle_dotfiles") },
-	{ key = "R", cb = tree_cb("refresh") },
-	{ key = "a", cb = tree_cb("create") },
-	{ key = "d", cb = tree_cb("remove") },
-	{ key = "r", cb = tree_cb("rename") },
-	{ key = "<C-r>", cb = tree_cb("full_rename") },
-	{ key = "x", cb = tree_cb("cut") },
-	{ key = "c", cb = tree_cb("copy") },
-	{ key = "p", cb = tree_cb("paste") },
-	{ key = "y", cb = tree_cb("copy_name") },
-	{ key = "Y", cb = tree_cb("copy_path") },
-	{ key = "gy", cb = tree_cb("copy_absolute_path") },
-	{ key = "[c", cb = tree_cb("prev_git_item") },
-	{ key = "]c", cb = tree_cb("next_git_item") },
-	{ key = "-", cb = tree_cb("dir_up") },
-	{ key = "q", cb = tree_cb("close") },
-	{ key = "g?", cb = tree_cb("toggle_help") },
+	{ key = "l", action = "edit", action_cb = edit_or_open },
+	{ key = "L", action = "vsplit_preview", action_cb = vsplit_preview },
+	{ key = "h", action = "close_node" },
+	{ key = "H", action = "collapse_all", action_cb = collapse_all },
+	{ key = "ga", action = "git_add", action_cb = git_add },
+	{ key = "c", action = "copy_file_to", action_cb = copy_file_to },
 }
 
 require("nvim-tree").setup({
+	live_filter = {
+		prefix = "[FILTER]: ",
+		always_show_folders = false, -- Turn into false from true by default
+	},
 	disable_netrw = true,
 	hijack_netrw = true,
 	open_on_tab = false,
@@ -125,3 +174,7 @@ require("nvim-tree").setup({
 		custom = { "^.git$", "^.yarn$" },
 	},
 })
+
+vim.api.nvim_set_keymap("n", "<Leader>e", ":NvimTreeToggle<CR>", { noremap = true })
+vim.api.nvim_set_keymap("n", "<Leader>R", ":NvimTreeRefresh<CR>", { noremap = true })
+vim.api.nvim_set_keymap("n", "<Leader>F", ":NvimTreeFindFile<CR>", { noremap = true })
