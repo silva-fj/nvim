@@ -126,8 +126,8 @@ lsp.on_attach(function(client, bufnr)
 		vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
 	end
 
-	nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
-	nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
+	-- nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
+	-- nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
 	nmap("gd", vim.lsp.buf.definition, "[G]oto [D]efinition")
 	nmap("gr", function()
 		require("telescope.builtin").lsp_references({ layout_strategy = "vertical" })
@@ -140,7 +140,7 @@ lsp.on_attach(function(client, bufnr)
 	nmap("<leader>ws", function()
 		require("telescope.builtin").lsp_dynamic_workspace_symbols({ layout_strategy = "vertical" })
 	end, "[W]orkspace [S]ymbols")
-	nmap("<space>ld", vim.diagnostic.open_float, "[L]ine [D]iagnostic")
+	-- nmap("<space>ld", vim.diagnostic.open_float, "[L]ine [D]iagnostic")
 	nmap("ff", "<cmd>Format<CR>", "[F]ormat [F]ile")
 
 	-- See `:help K` for why this keymap
