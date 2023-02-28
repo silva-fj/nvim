@@ -17,18 +17,17 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 require("lazy").setup({
-	"Mofiqul/vscode.nvim",
+	-- Colorschemes
 	{
 		"ellisonleao/gruvbox.nvim",
-		"mhartington/oceanic-next",
 		lazy = false, -- make sure we load this during startup if it is your main colorscheme
 		priority = 1000, -- make sure to load this before all the other start plugins
 		config = function()
 			-- load the colorscheme here
-			vim.cmd([[colorscheme gruvbox]])
+			vim.cmd.colorscheme("gruvbox")
 		end,
 	},
-	-- Colorschemes
+	"mhartington/oceanic-next",
 	"Mofiqul/vscode.nvim",
 	"ellisonleao/gruvbox.nvim",
 	"mhartington/oceanic-next",
