@@ -72,9 +72,6 @@ return {
     "lewis6991/gitsigns.nvim",
     "kdheepak/lazygit.nvim",
 
-    -- Comments
-    "numToStr/Comment.nvim",
-    "JoosepAlviste/nvim-ts-context-commentstring",
     {
         "folke/todo-comments.nvim",
         dependencies = "nvim-lua/plenary.nvim",
