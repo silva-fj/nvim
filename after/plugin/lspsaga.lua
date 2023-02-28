@@ -20,6 +20,9 @@ require("lspsaga").setup({
 		hover = " ",
 		kind = {},
 	},
+	symbol_in_winbar = {
+		enable = false,
+	},
 })
 
 local keymap = vim.keymap.set
