@@ -62,7 +62,12 @@ return {
 
     -- Git
     "tpope/vim-rhubarb",
-    "kdheepak/lazygit.nvim",
+    {
+        "kdheepak/lazygit.nvim",
+        config = function()
+            vim.api.nvim_set_keymap("n", "<Leader>lg", ":LazyGit<CR>", { noremap = true, silent = true })
+        end,
+    },
 
     {
         "folke/todo-comments.nvim",
