@@ -86,8 +86,7 @@ return {
             require("lualine").setup()
         end,
     },
-    { "nvim-tree/nvim-tree.lua", dependencies = { "nvim-tree/nvim-web-devicons" } },
-    { "romgrk/barbar.nvim",      dependencies = "nvim-tree/nvim-web-devicons" },
+    { "romgrk/barbar.nvim", dependencies = "nvim-tree/nvim-web-devicons" },
     "lukas-reineke/indent-blankline.nvim",
     {
         "goolord/alpha-nvim",
