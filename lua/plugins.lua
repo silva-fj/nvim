@@ -159,6 +159,9 @@ require("packer").startup(function(use)
 		end,
 	})
 	use("folke/lsp-colors.nvim")
+	use("windwp/nvim-spectre", function()
+		require("spectre").setup()
+	end)
 
 	if packer_bootstrap then
 		require("packer").sync()
