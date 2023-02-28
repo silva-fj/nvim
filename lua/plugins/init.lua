@@ -77,7 +77,6 @@ return {
     "ray-x/lsp_signature.nvim",
 
     -- Git
-    "tpope/vim-fugitive",
     "tpope/vim-rhubarb",
     "lewis6991/gitsigns.nvim",
     "kdheepak/lazygit.nvim",
