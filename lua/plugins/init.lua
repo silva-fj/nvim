@@ -22,13 +22,6 @@ return {
         end,
     },
     "RRethy/vim-illuminate",
-    -- Fuzzy finder
-    { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-    {
-        "nvim-telescope/telescope.nvim",
-        version = "0.1.0",
-        dependencies = { { "nvim-lua/plenary.nvim" } },
-    },
     -- LSP
     {
         "VonHeikemen/lsp-zero.nvim",
@@ -93,8 +86,8 @@ return {
             require("lualine").setup()
         end,
     },
-    { "nvim-tree/nvim-tree.lua",                  dependencies = { "nvim-tree/nvim-web-devicons" } },
-    { "romgrk/barbar.nvim",                       dependencies = "nvim-tree/nvim-web-devicons" },
+    { "nvim-tree/nvim-tree.lua", dependencies = { "nvim-tree/nvim-web-devicons" } },
+    { "romgrk/barbar.nvim",      dependencies = "nvim-tree/nvim-web-devicons" },
     "lukas-reineke/indent-blankline.nvim",
     {
         "goolord/alpha-nvim",
