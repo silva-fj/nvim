@@ -103,12 +103,6 @@ return {
     },
     "tpope/vim-surround",
     {
-        "rmagatti/goto-preview",
-        config = function()
-            require("goto-preview").setup()
-        end,
-    },
-    {
         "windwp/nvim-ts-autotag",
         config = function()
             require("nvim-ts-autotag").setup()
