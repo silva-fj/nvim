@@ -1,44 +1,57 @@
-local ensure_packer = function()
-	local fn = vim.fn
-	local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-	if fn.empty(fn.glob(install_path)) > 0 then
-		fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
-		vim.cmd([[packadd packer.nvim]])
-		return true
-	end
-	return false
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+	vim.fn.system({
+		"git",
+		"clone",
+		"--filter=blob:none",
+		"https://github.com/folke/lazy.nvim.git",
+		"--branch=stable", -- latest stable release
+		lazypath,
+	})
 end
 
-local packer_bootstrap = ensure_packer()
+vim.opt.rtp:prepend(lazypath)
 
-require("packer").startup(function(use)
-	-- Packer can manage itself
-	use("wbthomason/packer.nvim")
+-- Make sure to set `mapleader` before lazy so your mappings are correct
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
+require("lazy").setup({
+	"Mofiqul/vscode.nvim",
+	{
+		"ellisonleao/gruvbox.nvim",
+		"mhartington/oceanic-next",
+		lazy = false, -- make sure we load this during startup if it is your main colorscheme
+		priority = 1000, -- make sure to load this before all the other start plugins
+		config = function()
+			-- load the colorscheme here
+			vim.cmd([[colorscheme gruvbox]])
+		end,
+	},
 	-- Colorschemes
-	use("Mofiqul/vscode.nvim")
-	use("ellisonleao/gruvbox.nvim")
-	use("mhartington/oceanic-next")
-	use("folke/tokyonight.nvim")
-	use({
+	"Mofiqul/vscode.nvim",
+	"ellisonleao/gruvbox.nvim",
+	"mhartington/oceanic-next",
+	"folke/tokyonight.nvim",
+	{
 		"nvim-treesitter/nvim-treesitter",
-		run = function()
+		build = function()
 			local ts_update = require("nvim-treesitter.install").update({ with_sync = true })
 			ts_update()
 		end,
-	})
-	use("RRethy/vim-illuminate")
+	},
+	"RRethy/vim-illuminate",
 	-- Fuzzy finder
-	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
-	use({
+	{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+	{
 		"nvim-telescope/telescope.nvim",
 		tag = "0.1.0",
-		requires = { { "nvim-lua/plenary.nvim" } },
-	})
+		dependencies = { { "nvim-lua/plenary.nvim" } },
+	},
 	-- LSP
-	use({
+	{
 		"VonHeikemen/lsp-zero.nvim",
-		requires = {
+		dependencies = {
 			{ "neovim/nvim-lspconfig" },
 			{ "williamboman/mason.nvim" },
 			{ "williamboman/mason-lspconfig.nvim" },
@@ -56,132 +69,115 @@ require("packer").startup(function(use)
 			{ "L3MON4D3/LuaSnip" },
 			{ "rafamadriz/friendly-snippets" },
 		},
-	})
-	use({
+	},
+	{
 		"glepnir/lspsaga.nvim",
 		branch = "main",
-		requires = {
+		dependencies = {
 			{ "nvim-tree/nvim-web-devicons" },
 			--Please make sure you install markdown and markdown_inline parser
 			{ "nvim-treesitter/nvim-treesitter" },
 		},
-	})
-	use({
+	},
+	{
 		"jose-elias-alvarez/null-ls.nvim",
-		requires = { "nvim-lua/plenary.nvim" },
-	})
-	use({
+		dependencies = { "nvim-lua/plenary.nvim" },
+	},
+	{
 		-- Useful status updates for LSP
 		"j-hui/fidget.nvim",
 		config = function()
 			require("fidget").setup()
 		end,
-	})
-	use({
+	},
+	{
 		"folke/trouble.nvim",
-		requires = "kyazdani42/nvim-web-devicons",
+		dependencies = "nvim-tree/nvim-web-devicons",
 		config = function()
 			require("trouble").setup()
 		end,
-	})
-	use("ray-x/lsp_signature.nvim")
+	},
+	"ray-x/lsp_signature.nvim",
 
 	-- Git
-	use("tpope/vim-fugitive")
-	use("tpope/vim-rhubarb")
-	use("lewis6991/gitsigns.nvim")
-	use("kdheepak/lazygit.nvim")
+	"tpope/vim-fugitive",
+	"tpope/vim-rhubarb",
+	"lewis6991/gitsigns.nvim",
+	"kdheepak/lazygit.nvim",
 
 	-- Comments
-	use("numToStr/Comment.nvim")
-	use("JoosepAlviste/nvim-ts-context-commentstring")
-	use({
+	"numToStr/Comment.nvim",
+	"JoosepAlviste/nvim-ts-context-commentstring",
+	{
 		"folke/todo-comments.nvim",
-		requires = "nvim-lua/plenary.nvim",
+		dependencies = "nvim-lua/plenary.nvim",
 		config = function()
 			require("todo-comments").setup()
 		end,
-	})
+	},
 
-	use("christoomey/vim-tmux-navigator")
-	use({
+	"christoomey/vim-tmux-navigator",
+	{
 		"nvim-tree/nvim-web-devicons",
 		config = function()
 			require("nvim-web-devicons").setup({ default = true })
 		end,
-	})
-	use({
+	},
+	{
 		"nvim-lualine/lualine.nvim",
-		requires = { "kyazdani42/nvim-web-devicons", opt = true },
+		dependencies = { "nvim-tree/nvim-web-devicons", opt = true },
 		config = function()
 			require("lualine").setup()
 		end,
-	})
-	use({ "nvim-tree/nvim-tree.lua", requires = { "nvim-tree/nvim-web-devicons" } })
-	use({
-		"akinsho/bufferline.nvim",
-		tag = "v3.*",
-		requires = "nvim-tree/nvim-web-devicons",
-		config = function()
-			require("bufferline").setup()
-		end,
-	})
-	use("lukas-reineke/indent-blankline.nvim")
-	use({
+	},
+	{ "nvim-tree/nvim-tree.lua", dependencies = { "nvim-tree/nvim-web-devicons" } },
+	-- {
+	-- 	"akinsho/bufferline.nvim",
+	-- 	tag = "v3.*",
+	-- 	dependencies = "nvim-tree/nvim-web-devicons",
+	-- 	config = function()
+	-- 		require("bufferline").setup()
+	-- 	end,
+	-- },
+	{ "romgrk/barbar.nvim", dependencies = "nvim-tree/nvim-web-devicons" },
+	"lukas-reineke/indent-blankline.nvim",
+	{
 		"goolord/alpha-nvim",
-		requires = { "nvim-tree/nvim-web-devicons" },
+		dependencies = { "nvim-tree/nvim-web-devicons" },
 		config = function()
 			require("alpha").setup(require("alpha.themes.startify").config)
 		end,
-	})
-	use({
+	},
+	{
 		"windwp/nvim-autopairs",
 		config = function()
 			require("nvim-autopairs").setup()
 		end,
-	})
-	use("tpope/vim-surround")
-	use({
+	},
+	"tpope/vim-surround",
+	{
 		"rmagatti/goto-preview",
 		config = function()
 			require("goto-preview").setup()
 		end,
-	})
-	use({
+	},
+	{
 		"windwp/nvim-ts-autotag",
 		config = function()
 			require("nvim-ts-autotag").setup()
 		end,
-	})
-	use({
+	},
+	{
 		"kosayoda/nvim-lightbulb",
 		config = function()
 			require("nvim-lightbulb").setup({ autocmd = { enabled = true } })
 		end,
-	})
-	use("folke/lsp-colors.nvim")
-	use("windwp/nvim-spectre", function()
-		require("spectre").setup()
-	end)
-
-	if packer_bootstrap then
-		require("packer").sync()
-	end
-end)
-
-if packer_bootstrap then
-	print("==================================")
-	print("    Plugins are being installed")
-	print("    Wait until Packer completes,")
-	print("       then restart nvim")
-	print("==================================")
-	return
-end
-
--- Automatically source and re-compile packer whenever you save this init.lua
-local packer_group = vim.api.nvim_create_augroup("Packer", { clear = true })
-vim.api.nvim_create_autocmd("BufWritePost", {
-	command = "source <afile> | PackerCompile",
-	group = packer_group,
-	pattern = vim.fn.expand("$MYVIMRC"),
+	},
+	"folke/lsp-colors.nvim",
+	{
+		"windwp/nvim-spectre",
+		config = function()
+			require("spectre").setup()
+		end,
+	},
 })
