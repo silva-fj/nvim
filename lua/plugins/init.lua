@@ -52,15 +52,6 @@ return {
         },
     },
     {
-        "glepnir/lspsaga.nvim",
-        branch = "main",
-        dependencies = {
-            { "nvim-tree/nvim-web-devicons" },
-            --Please make sure you install markdown and markdown_inline parser
-            { "nvim-treesitter/nvim-treesitter" },
-        },
-    },
-    {
         -- Useful status updates for LSP
         "j-hui/fidget.nvim",
         config = function()
