@@ -44,7 +44,7 @@ require("lazy").setup({
 	{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 	{
 		"nvim-telescope/telescope.nvim",
-		tag = "0.1.0",
+		version = "0.1.0",
 		dependencies = { { "nvim-lua/plenary.nvim" } },
 	},
 	-- LSP
@@ -124,20 +124,12 @@ require("lazy").setup({
 	},
 	{
 		"nvim-lualine/lualine.nvim",
-		dependencies = { "nvim-tree/nvim-web-devicons", opt = true },
+		dependencies = { "nvim-tree/nvim-web-devicons", lazy = true },
 		config = function()
 			require("lualine").setup()
 		end,
 	},
 	{ "nvim-tree/nvim-tree.lua", dependencies = { "nvim-tree/nvim-web-devicons" } },
-	-- {
-	-- 	"akinsho/bufferline.nvim",
-	-- 	tag = "v3.*",
-	-- 	dependencies = "nvim-tree/nvim-web-devicons",
-	-- 	config = function()
-	-- 		require("bufferline").setup()
-	-- 	end,
-	-- },
 	{ "romgrk/barbar.nvim", dependencies = "nvim-tree/nvim-web-devicons" },
 	"lukas-reineke/indent-blankline.nvim",
 	{
