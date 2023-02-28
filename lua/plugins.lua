@@ -19,6 +19,7 @@ require("packer").startup(function(use)
 	use("Mofiqul/vscode.nvim")
 	use("ellisonleao/gruvbox.nvim")
 	use("mhartington/oceanic-next")
+	use("folke/tokyonight.nvim")
 	use({
 		"nvim-treesitter/nvim-treesitter",
 		run = function()
