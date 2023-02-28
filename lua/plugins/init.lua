@@ -87,7 +87,6 @@ return {
         end,
     },
     { "romgrk/barbar.nvim", dependencies = "nvim-tree/nvim-web-devicons" },
-    "lukas-reineke/indent-blankline.nvim",
     {
         "goolord/alpha-nvim",
         dependencies = { "nvim-tree/nvim-web-devicons" },
