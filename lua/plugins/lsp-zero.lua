@@ -14,6 +14,8 @@ return {
 		{ "hrsh7th/cmp-nvim-lua" },
 		{ "hrsh7th/cmp-cmdline" },
 
+		{ "onsails/lspkind.nvim" },
+
 		-- Snippets
 		{
 			"L3MON4D3/LuaSnip",
@@ -72,8 +74,23 @@ return {
 		-- cmp_mappings['<Tab>'] = nil
 		-- cmp_mappings['<S-Tab>'] = nil
 
+		local lspkind = require("lspkind")
+
 		lsp.setup_nvim_cmp({
 			mapping = cmp_mappings,
+			formatting = {
+				format = function(entry, vim_item)
+					vim_item.kind = require("lspkind").presets.default[vim_item.kind] .. " " .. vim_item.kind
+					vim_item.menu = ({
+						nvim_lsp = "[LSP]",
+						buffer = "[Buffer]",
+						vsnip = "[VSNIP]",
+						nvim_lua = "[Lua]",
+						path = "[PATH]",
+					})[entry.source.name]
+					return vim_item
+				end,
+			},
 		})
 
 		-- Fix Undefined global 'vim'
