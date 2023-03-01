@@ -14,36 +14,7 @@ return {
     "ellisonleao/gruvbox.nvim",
     "mhartington/oceanic-next",
     "folke/tokyonight.nvim",
-    {
-        "nvim-treesitter/nvim-treesitter",
-        build = function()
-            local ts_update = require("nvim-treesitter.install").update({ with_sync = true })
-            ts_update()
-        end,
-    },
     "RRethy/vim-illuminate",
-    -- LSP
-    {
-        "VonHeikemen/lsp-zero.nvim",
-        dependencies = {
-            { "neovim/nvim-lspconfig" },
-            { "williamboman/mason.nvim" },
-            { "williamboman/mason-lspconfig.nvim" },
-
-            -- Autocompletion
-            { "hrsh7th/nvim-cmp" },
-            { "hrsh7th/cmp-buffer" },
-            { "hrsh7th/cmp-path" },
-            { "saadparwaiz1/cmp_luasnip" },
-            { "hrsh7th/cmp-nvim-lsp" },
-            { "hrsh7th/cmp-nvim-lua" },
-            { "hrsh7th/cmp-cmdline" },
-
-            -- Snippets
-            { "L3MON4D3/LuaSnip" },
-            { "rafamadriz/friendly-snippets" },
-        },
-    },
     {
         -- Useful status updates for LSP
         "j-hui/fidget.nvim",
@@ -56,6 +27,19 @@ return {
         dependencies = "nvim-tree/nvim-web-devicons",
         config = function()
             require("trouble").setup()
+            vim.api.nvim_set_keymap(
+                "n",
+                "<leader>ge",
+                "<cmd>Trouble document_diagnostics<cr>",
+                { silent = true, noremap = true }
+            )
+            vim.api.nvim_set_keymap(
+                "n",
+                "<leader>gE",
+                "<cmd>Trouble workspace_diagnostics<cr>",
+                { silent = true, noremap = true }
+            )
+            vim.api.nvim_set_keymap("n", "gr", "<cmd>Trouble lsp_references<cr>", { silent = true, noremap = true })
         end,
     },
     "ray-x/lsp_signature.nvim",
@@ -123,6 +107,10 @@ return {
         "windwp/nvim-spectre",
         config = function()
             require("spectre").setup()
+            local keymap = vim.keymap.set
+
+            -- Code action
+            keymap({ "n" }, "<leader>S", "<cmd>lua require('spectre').open()<CR>")
         end,
     },
 }
