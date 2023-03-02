@@ -92,7 +92,7 @@ return {
                 prefix = "[FILTER]: ",
                 always_show_folders = false, -- Turn into false from true by default
             },
-            disable_netrw = true,
+            disable_netrw = false,
             hijack_netrw = true,
             open_on_tab = false,
             hijack_cursor = false,
