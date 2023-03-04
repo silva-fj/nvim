@@ -82,12 +82,6 @@ return {
 			require("alpha").setup(require("alpha.themes.startify").config)
 		end,
 	},
-	{
-		"windwp/nvim-autopairs",
-		config = function()
-			require("nvim-autopairs").setup()
-		end,
-	},
 	"tpope/vim-surround",
 	{
 		"windwp/nvim-ts-autotag",
