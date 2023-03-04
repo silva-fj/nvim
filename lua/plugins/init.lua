@@ -74,7 +74,22 @@ return {
 			require("lualine").setup()
 		end,
 	},
-	{ "romgrk/barbar.nvim", dependencies = "nvim-tree/nvim-web-devicons" },
+	{
+		"akinsho/bufferline.nvim",
+		version = "v3.*",
+		dependencies = { "nvim-tree/nvim-web-devicons", lazy = true },
+		config = function()
+			require("bufferline").setup({
+				options = {
+					diagnostics = "nvim_lsp",
+					diagnostics_indicator = function(count, level)
+						local icon = level:match("error") and " " or " "
+						return " " .. icon .. count
+					end,
+				},
+			})
+		end,
+	},
 	{
 		"goolord/alpha-nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
