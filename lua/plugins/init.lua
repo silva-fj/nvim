@@ -1,18 +1,37 @@
 return {
 	-- Colorschemes
-	"ellisonleao/gruvbox.nvim",
-	"mhartington/oceanic-next",
+	-- gruvbox
+	{ "ellisonleao/gruvbox.nvim" },
 	{
 		"Mofiqul/vscode.nvim",
+	},
+	-- OceanicNext
+	{
+		"mhartington/oceanic-next",
+	},
+	-- tokyonight
+	{
+		"folke/tokyonight.nvim",
+	},
+	-- nord
+	{
+		"shaunsingh/nord.nvim",
+	},
+	-- codedark
+	{
+		"tomasiser/vim-code-dark",
 		lazy = false, -- make sure we load this during startup if it is your main colorscheme
 		priority = 1000, -- make sure to load this before all the other start plugins
 		config = function()
-			vim.cmd.colorscheme("vscode")
+			vim.cmd.colorscheme("codedark")
 		end,
 	},
-	"ellisonleao/gruvbox.nvim",
-	"mhartington/oceanic-next",
-	"folke/tokyonight.nvim",
+	-- nightfly
+	{
+		"bluz71/vim-nightfly-colors",
+		name = "nightfly",
+	},
+
 	"RRethy/vim-illuminate",
 	{
 		-- Useful status updates for LSP
