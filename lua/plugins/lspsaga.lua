@@ -47,9 +47,6 @@ return {
 		-- unfocus the show_line_diagnostics floating window
 		keymap("n", "<leader>dl", "<cmd>Lspsaga show_line_diagnostics<CR>")
 
-		-- Show buffer diagnostics
-		keymap("n", "<leader>db", "<cmd>Lspsaga show_buf_diagnostics<CR>")
-
 		-- Diagnostic jump
 		-- You can use <C-o> to jump back to your previous location
 		keymap("n", "[g", "<cmd>Lspsaga diagnostic_jump_prev<CR>")
@@ -61,7 +58,7 @@ return {
 		-- there is no information available.
 		-- To disable it just use ":Lspsaga hover_doc ++quiet"
 		-- Pressing the key twice will enter the hover window
-		keymap("n", "K", "<cmd>Lspsaga hover_doc<CR>")
+		-- keymap("n", "K", "<cmd>Lspsaga hover_doc<CR>")
 
 		-- Floating terminal
 		keymap({ "n", "t" }, "<leader>t", "<cmd>Lspsaga term_toggle<CR>")

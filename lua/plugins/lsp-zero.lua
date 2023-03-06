@@ -74,8 +74,6 @@ return {
 		-- cmp_mappings['<Tab>'] = nil
 		-- cmp_mappings['<S-Tab>'] = nil
 
-		local lspkind = require("lspkind")
-
 		lsp.setup_nvim_cmp({
 			mapping = cmp_mappings,
 			formatting = {
@@ -201,7 +199,7 @@ return {
 			nmap("ff", "<cmd>Format<CR>", "[F]ormat [F]ile")
 
 			-- See `:help K` for why this keymap
-			-- nmap("K", vim.lsp.buf.hover, "Hover Documentation")
+			nmap("K", vim.lsp.buf.hover, "Hover Documentation")
 			nmap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
 
 			-- Lesser used LSP functionality
