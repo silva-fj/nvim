@@ -13,7 +13,15 @@ return {
 		{ "saadparwaiz1/cmp_luasnip" },
 		{ "hrsh7th/cmp-nvim-lua" },
 		{ "hrsh7th/cmp-cmdline" },
-
+		{
+			"roobert/tailwindcss-colorizer-cmp.nvim",
+			-- optionally, override the default options:
+			config = function()
+				require("tailwindcss-colorizer-cmp").setup({
+					color_square_width = 2,
+				})
+			end,
+		},
 		{ "onsails/lspkind.nvim" },
 
 		-- Snippets
@@ -86,7 +94,8 @@ return {
 						nvim_lua = "[Lua]",
 						path = "[PATH]",
 					})[entry.source.name]
-					return vim_item
+
+					return require("tailwindcss-colorizer-cmp").formatter(entry, vim_item)
 				end,
 			},
 		})
@@ -115,6 +124,18 @@ return {
 
 			return capabilities
 		end
+
+		lsp.configure("tailwindcss", {
+			settings = {
+				tailwindCSS = {
+					experimental = {
+						classRegex = {
+							{ "cva|cx\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]" },
+						},
+					},
+				},
+			},
+		})
 
 		lsp.configure("jsonls", {
 			on_attach = function(client)

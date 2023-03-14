@@ -131,6 +131,16 @@ return {
 	},
 	"folke/lsp-colors.nvim",
 	{
+		"NvChad/nvim-colorizer.lua",
+		config = function()
+			require("colorizer").setup({
+				user_default_options = {
+					tailwind = true,
+				},
+			})
+		end,
+	},
+	{
 		"windwp/nvim-spectre",
 		config = function()
 			require("spectre").setup()
