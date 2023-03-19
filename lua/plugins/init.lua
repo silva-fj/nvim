@@ -153,6 +153,12 @@ return {
 		end,
 	},
 	{
+		"mbbill/undotree",
+		keys = {
+			{ "<leader>u", "<cmd>UndotreeToggle<cr>", desc = "UndoTree" },
+		},
+	},
+	{
 		"ThePrimeagen/refactoring.nvim",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
