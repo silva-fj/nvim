@@ -62,13 +62,13 @@ return {
 			["<C-f>"] = cmp.mapping.scroll_docs(4),
 			["<C-Space>"] = cmp.mapping.complete(),
 			["<C-e>"] = cmp.mapping.close(),
-			["<Tab>"] = function(fallback)
-				if cmp.visible() then
-					cmp.select_next_item()
-				else
-					fallback()
-				end
-			end,
+			-- ["<Tab>"] = function(fallback)
+			-- 	if cmp.visible() then
+			-- 		cmp.select_next_item()
+			-- 	else
+			-- 		fallback()
+			-- 	end
+			-- end,
 			["<CR>"] = cmp.mapping({
 				i = cmp.mapping.confirm({ select = true }),
 				c = cmp.mapping.confirm({
@@ -79,8 +79,8 @@ return {
 
 		-- disable completion with tab
 		-- this helps with copilot setup
-		-- cmp_mappings['<Tab>'] = nil
-		-- cmp_mappings['<S-Tab>'] = nil
+		cmp_mappings["<Tab>"] = nil
+		cmp_mappings["<S-Tab>"] = nil
 
 		lsp.setup_nvim_cmp({
 			mapping = cmp_mappings,
