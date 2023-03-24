@@ -70,13 +70,6 @@ return {
 			}),
 		})
 
-		-- cmp.setup.cmdline("/", {
-		--     mapping = cmp.mapping.preset.cmdline(),
-		--     sources = {
-		--         { name = "buffer" },
-		--     },
-		-- })
-
 		cmp.setup.cmdline(":", {
 			mapping = cmp.mapping.preset.cmdline(),
 			sources = cmp.config.sources({
@@ -107,11 +100,6 @@ return {
 				ghost_text = false, -- this feature conflict with copilot.vim's preview.
 			},
 		})
-
-		-- disable completion with tab
-		-- this helps with copilot setup
-		-- cmp_mappings["<Tab>"] = nil
-		-- cmp_mappings["<S-Tab>"] = nil
 
 		-- Fix Undefined global 'vim'
 		lsp.configure("lua_ls", {
