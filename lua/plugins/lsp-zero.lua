@@ -99,6 +99,10 @@ return {
 			experimental = {
 				ghost_text = false, -- this feature conflict with copilot.vim's preview.
 			},
+			completion = {
+				-- disable auto completion to let copilot.vim handle it
+				autocomplete = false,
+			},
 		})
 
 		-- Fix Undefined global 'vim'
@@ -179,12 +183,13 @@ return {
 		lsp.on_attach(function(client, bufnr)
 			print("LSP started.")
 			require("illuminate").on_attach(client)
-			require("lsp_signature").on_attach({
-				bind = true, -- This is mandatory, otherwise border config won't get registered.
-				handler_opts = {
-					border = "rounded",
-				},
-			}, bufnr)
+			-- it has conflics with copilot
+			-- require("lsp_signature").on_attach({
+			-- 	bind = true, -- This is mandatory, otherwise border config won't get registered.
+			-- 	handler_opts = {
+			-- 		border = "rounded",
+			-- 	},
+			-- }, bufnr)
 
 			-- Create a command `:Format` local to the LSP buffer
 			vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
