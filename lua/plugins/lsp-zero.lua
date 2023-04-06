@@ -30,12 +30,12 @@ return {
 			config = function()
 				vim.cmd([[
                       " Expand
-                      imap <expr> <C-j>   luasnip#expandable()  ? '<Plug>luasnip-expand-snippet' : '<C-j>'
-                      smap <expr> <C-j>   luasnip#expandable()  ? '<Plug>luasnip-expand-snippet' : '<C-j>'
+                      imap <expr> <A-j>   luasnip#expandable()  ? '<Plug>luasnip-expand-snippet' : '<C-j>'
+                      smap <expr> <A-j>   luasnip#expandable()  ? '<Plug>luasnip-expand-snippet' : '<C-j>'
 
                       " Jump
-                      imap <expr> <C-l>   luasnip#jumpable(1)  ? '<Plug>luasnip-jump-next' : '<C-l>'
-                      smap <expr> <C-l>   luasnip#jumpable(1)  ? '<Plug>luasnip-jump-next' : '<C-l>'
+                      imap <expr> <A-l>   luasnip#jumpable(1)  ? '<Plug>luasnip-jump-next' : '<C-l>'
+                      smap <expr> <A-l>   luasnip#jumpable(1)  ? '<Plug>luasnip-jump-next' : '<C-l>'
                    ]])
 			end,
 		},
@@ -79,9 +79,28 @@ return {
 			}),
 		})
 
+		cmp_mappings["<Tab>"] = nil
+		cmp_mappings["<S-Tab>"] = nil
+
 		lsp.setup_nvim_cmp({
 			-- preselect = cmp.PreselectMode.None,
 			mapping = cmp_mappings,
+			-- mapping = {
+			-- 	["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
+			-- 	["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
+			-- 	["<C-d>"] = cmp.mapping.scroll_docs(-4),
+			-- 	["<C-f>"] = cmp.mapping.scroll_docs(4),
+			-- 	["<C-Space>"] = cmp.mapping.complete(),
+			-- 	["<C-e>"] = cmp.mapping.close(),
+			-- 	["<CR>"] = cmp.mapping({
+			-- 		i = cmp.mapping.confirm({ select = true }),
+			-- 		c = cmp.mapping.confirm({
+			-- 			select = false,
+			-- 		}),
+			-- 	}),
+			-- 	["<Tab>"] = nil,
+			-- 	["<S-Tab>"] = nil,
+			-- },
 			formatting = {
 				format = function(entry, vim_item)
 					vim_item.kind = require("lspkind").presets.default[vim_item.kind] .. " " .. vim_item.kind
