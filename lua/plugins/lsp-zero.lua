@@ -12,7 +12,7 @@ return {
         { "hrsh7th/cmp-path" },
         { "saadparwaiz1/cmp_luasnip" },
         { "hrsh7th/cmp-nvim-lua" },
-        { "hrsh7th/cmp-cmdline" },
+        -- { "hrsh7th/cmp-cmdline" },
         {
             "roobert/tailwindcss-colorizer-cmp.nvim",
             -- optionally, override the default options:
@@ -70,14 +70,14 @@ return {
             }),
         })
 
-        cmp.setup.cmdline(":", {
-            mapping = cmp.mapping.preset.cmdline(),
-            sources = cmp.config.sources({
-                { name = "path" },
-            }, {
-                { name = "cmdline" },
-            }),
-        })
+        -- cmp.setup.cmdline(":", {
+        --     mapping = cmp.mapping.preset.cmdline(),
+        --     sources = cmp.config.sources({
+        --         { name = "path" },
+        --     }, {
+        --         { name = "cmdline" },
+        --     }),
+        -- })
 
         cmp_mappings["<Tab>"] = nil
         cmp_mappings["<S-Tab>"] = nil
