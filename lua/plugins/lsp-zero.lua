@@ -12,7 +12,6 @@ return {
         { "hrsh7th/cmp-path" },
         { "saadparwaiz1/cmp_luasnip" },
         { "hrsh7th/cmp-nvim-lua" },
-        -- { "hrsh7th/cmp-cmdline" },
         {
             "roobert/tailwindcss-colorizer-cmp.nvim",
             -- optionally, override the default options:
@@ -70,35 +69,11 @@ return {
             }),
         })
 
-        -- cmp.setup.cmdline(":", {
-        --     mapping = cmp.mapping.preset.cmdline(),
-        --     sources = cmp.config.sources({
-        --         { name = "path" },
-        --     }, {
-        --         { name = "cmdline" },
-        --     }),
-        -- })
-
         cmp_mappings["<Tab>"] = nil
         cmp_mappings["<S-Tab>"] = nil
 
         lsp.setup_nvim_cmp({
-            -- preselect = cmp.PreselectMode.None,
             mapping = cmp_mappings,
-            mapping = {
-                ["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
-                ["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
-                ["<C-d>"] = cmp.mapping.scroll_docs(-4),
-                ["<C-f>"] = cmp.mapping.scroll_docs(4),
-                ["<C-Space>"] = cmp.mapping.complete(),
-                ["<C-e>"] = cmp.mapping.close(),
-                ["<CR>"] = cmp.mapping({
-                    i = cmp.mapping.confirm({ select = true }),
-                    c = cmp.mapping.confirm({
-                        select = false,
-                    }),
-                }),
-            },
             formatting = {
                 format = function(entry, vim_item)
                     vim_item.kind = require("lspkind").presets.default[vim_item.kind] .. " " .. vim_item.kind
@@ -128,6 +103,23 @@ return {
                 Lua = {
                     diagnostics = {
                         globals = { "vim" },
+                    },
+                },
+            },
+        })
+
+        lsp.configure("yamlls", {
+            keyOrdering = false,
+            settings = {
+                yaml = {
+                    schemas = {
+                        ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
+                        ["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] = {
+                            "docker-compose*.yml",
+                            "docker-compose.*.yml",
+                            "compose.*.yml",
+                            "compose-*.yml",
+                        },
                     },
                 },
             },
