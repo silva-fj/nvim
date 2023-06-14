@@ -41,6 +41,7 @@ return {
 		config = function()
 			require("fidget").setup()
 		end,
+		tag = "legacy",
 	},
 	{
 		"folke/trouble.nvim",
