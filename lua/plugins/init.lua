@@ -219,6 +219,13 @@ return {
             vim.keymap.set("n", "<leader>m", require("treesj").toggle)
         end,
     },
+    {
+        "nvim-treesitter/nvim-treesitter-context",
+        dependencies = { "nvim-treesitter/nvim-treesitter" },
+        config = function()
+            require("treesitter-context").setup()
+        end,
+    },
     -- {
     -- 	"zbirenbaum/copilot.lua",
     -- 	cmd = "Copilot",
