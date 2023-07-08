@@ -32,6 +32,20 @@ return {
 			symbol_in_winbar = {
 				enable = false,
 			},
+			code_action = {
+				num_shortcut = true,
+				show_server_name = true,
+				extend_gitsigns = true,
+				keys = {
+					-- string | table type
+					quit = "q",
+					exec = "<CR>",
+				},
+			},
+			lightbulb = {
+				enable = false,
+				enable_in_insert = false,
+			},
 		})
 
 		local keymap = vim.keymap.set
