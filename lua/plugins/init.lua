@@ -126,12 +126,12 @@ return {
             require("nvim-ts-autotag").setup()
         end,
     },
-    {
-        "kosayoda/nvim-lightbulb",
-        config = function()
-            require("nvim-lightbulb").setup({ autocmd = { enabled = true } })
-        end,
-    },
+    -- {
+    --     "kosayoda/nvim-lightbulb",
+    --     config = function()
+    --         require("nvim-lightbulb").setup({ autocmd = { enabled = true } })
+    --     end,
+    -- },
     "folke/lsp-colors.nvim",
     {
         "NvChad/nvim-colorizer.lua",
