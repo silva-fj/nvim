@@ -94,10 +94,6 @@ return {
             experimental = {
                 ghost_text = false, -- this feature conflict with copilot.vim's preview.
             },
-            -- completion = {
-            -- disable auto completion to let copilot.vim handle it
-            -- autocomplete = false,
-            -- },
         })
 
         lsp.skip_server_setup({ "rust_analyzer" })
@@ -215,8 +211,6 @@ return {
                 vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
             end
 
-            -- nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
-            -- nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
             nmap("gd", vim.lsp.buf.definition, "[G]oto [D]efinition")
             nmap("gr", function()
                 require("telescope.builtin").lsp_references({ layout_strategy = "vertical" })
@@ -229,7 +223,6 @@ return {
             nmap("<leader>ws", function()
                 require("telescope.builtin").lsp_dynamic_workspace_symbols({ layout_strategy = "vertical" })
             end, "[W]orkspace [S]ymbols")
-            -- nmap("<space>ld", vim.diagnostic.open_float, "[L]ine [D]iagnostic")
             nmap("ff", "<cmd>Format<CR>", "[F]ormat [F]ile")
 
             -- See `:help K` for why this keymap
@@ -248,14 +241,6 @@ return {
         lsp.on_attach(function(client, bufnr)
             print("LSP started.")
             require("illuminate").on_attach(client)
-            -- it has conflics with copilot
-            -- require("lsp_signature").on_attach({
-            -- 	bind = true, -- This is mandatory, otherwise border config won't get registered.
-            -- 	handler_opts = {
-            -- 		border = "rounded",
-            -- 	},
-            -- }, bufnr)
-
             set_mappings(bufnr)
         end)
 
