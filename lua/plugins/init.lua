@@ -9,6 +9,9 @@ return {
 			vim.cmd.colorscheme("gruvbox")
 		end,
 	},
+	-- onedark
+	{ "olimorris/onedarkpro.nvim" },
+	-- vscode
 	{
 		"Mofiqul/vscode.nvim",
 	},
