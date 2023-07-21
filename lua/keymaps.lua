@@ -9,9 +9,7 @@ map("n", "<leader>w", ":bd<cr>", {})
 
 local options = { noremap = true }
 map("n", "<leader>s", ":w<cr>", options)
--- map("n", "<leader><space>", ":nohlsearch<cr>", options)
 map("n", "<C-k>", ":TmuxNavigateUp<cr>", options)
--- map("n", "U", "*", options) -- let's try with normal key
 map("n", "Y", "y$", options)
 map("n", "<A-j>", ":m .+1<cr>==", options)
 map("n", "<A-k>", ":m .-2<cr>==", options)
