@@ -46,6 +46,7 @@ return {
 			require("fidget").setup()
 		end,
 		tag = "legacy",
+		event = "LspAttach",
 	},
 	{
 		"folke/trouble.nvim",
@@ -68,7 +69,6 @@ return {
 		end,
 	},
 
-	-- Git
 	"tpope/vim-rhubarb",
 	{
 		"folke/todo-comments.nvim",
