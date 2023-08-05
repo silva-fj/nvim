@@ -17,7 +17,7 @@ set.backup = false
 set.writebackup = false
 set.signcolumn = "yes"
 set.cmdheight = 1
-set.updatetime = 300
+set.updatetime = 100
 
 vim.opt.clipboard = { "unnamed", "unnamedplus" }
 vim.opt.wildignore = { "*/temp/*", "*.so", "*.zip", "*/node_modules/*", "*/vendor/bundle/*", "*/vendor/*" }
