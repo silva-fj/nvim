@@ -109,9 +109,6 @@ return {
                     diagnostics = {
                         globals = { "vim" },
                     },
-                    formatting = {
-                        enable = false,
-                    },
                 },
             },
         })
