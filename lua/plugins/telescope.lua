@@ -37,7 +37,7 @@ return {
 
 		local project_files = function(preview)
 			local opts = {
-				layout_strategy = "vertical",
+				-- layout_strategy = "vertical",
 				prompt_prefix = "🔍 ",
 			}
 			vim.fn.system("git rev-parse --is-inside-work-tree")
@@ -57,7 +57,7 @@ return {
 		end
 
 		vim.keymap.set("n", "<leader>sf", function()
-			project_files(false)
+			project_files(true)
 		end, { desc = "[S]earch [P]project [F]iles (No Preview)" })
 
 		vim.keymap.set("n", "<leader>?", function()
