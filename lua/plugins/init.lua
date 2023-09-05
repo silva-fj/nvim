@@ -192,4 +192,8 @@ return {
     {
         "airblade/vim-gitgutter",
     },
+    {
+        'mg979/vim-visual-multi',
+        branch = 'master',
+    },
 }
