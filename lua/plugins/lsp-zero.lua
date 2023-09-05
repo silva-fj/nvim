@@ -47,9 +47,6 @@ return {
         -- RUST
         { "rust-lang/rust.vim" },
         { "simrat39/rust-tools.nvim" },
-
-        -- Typescript
-        { "pmizio/typescript-tools.nvim" },
     },
     config = function()
         local lsp = require("lsp-zero")
@@ -57,7 +54,7 @@ return {
         lsp.preset("recommended")
 
         lsp.ensure_installed({
-            -- "tsserver",
+            "tsserver",
             "eslint",
             "lua_ls",
         })
@@ -133,12 +130,12 @@ return {
             },
         })
 
-        -- lsp.configure("tsserver", {
-        --     on_attach = function(client)
-        --         client.server_capabilities.documentFormattingProvider = false
-        --         client.server_capabilities.documentRangeFormattingProvider = false
-        --     end,
-        -- })
+        lsp.configure("tsserver", {
+            on_attach = function(client)
+                client.server_capabilities.documentFormattingProvider = false
+                client.server_capabilities.documentRangeFormattingProvider = false
+            end,
+        })
 
         local jsonlsCapabilities = function()
             local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -297,18 +294,6 @@ return {
                 cargo = {
                     features = { "all" },
                 },
-            },
-        })
-
-        local ts_tools = require("typescript-tools")
-
-        ts_tools.setup({
-            server = {
-                on_attach = function(client, bufnr)
-                    client.server_capabilities.documentFormattingProvider = false
-                    client.server_capabilities.documentRangeFormattingProvider = false
-                    set_mappings(bufnr)
-                end,
             },
         })
 
