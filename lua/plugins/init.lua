@@ -189,9 +189,9 @@ return {
             vim.keymap.set("n", "<leader>m", require("treesj").toggle)
         end,
     },
-    {
-        "airblade/vim-gitgutter",
-    },
+    -- {
+    --     "airblade/vim-gitgutter",
+    -- },
     {
         'mg979/vim-visual-multi',
         branch = 'master',
