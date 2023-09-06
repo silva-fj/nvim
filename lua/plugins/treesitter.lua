@@ -5,7 +5,11 @@ return {
     end,
     config = function()
         require("nvim-treesitter.configs").setup({
-            ensure_installed = "all",
+            ensure_installed = {
+                "rust", "typescript", "tsx", "css", "graphql", "html", "javascript", "lua", "scss", "vim", "go", "yaml",
+                "toml", "terraform", "svelte", "sql", "json", "gitignore", "diff", "git_rebase", "gitcommit",
+                "dockerfile", "dart", "cmake", "bash"
+            },
             sync_install = false,
             auto_install = true,
             highlight = {
