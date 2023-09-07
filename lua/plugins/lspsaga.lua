@@ -7,7 +7,7 @@ return {
     config = function()
         require("lspsaga").setup({
             rename = {
-                in_select = true,
+                in_select = false,
                 auto_save = false,
                 project_max_width = 0.5,
                 project_max_height = 0.5,
@@ -33,8 +33,9 @@ return {
                 enable = false,
             },
             lightbulb = {
-                enable = false,
-                enable_in_insert = false,
+                enable = true,
+                sign = true,
+                virtual_text = false
             },
         })
 
