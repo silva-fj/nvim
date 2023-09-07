@@ -1,6 +1,5 @@
 return {
     -- Colorschemes
-    -- gruvbox
     {
         "ellisonleao/gruvbox.nvim",
         lazy = false,    -- make sure we load this during startup if it is your main colorscheme
@@ -9,34 +8,13 @@ return {
             vim.cmd.colorscheme("gruvbox")
         end,
     },
-    -- Dracula
-    {
-        "dracula/vim",
-        name = "dracula",
-    },
-    -- onedark
-    { "olimorris/onedarkpro.nvim" },
-    -- vscode
-    {
-        "Mofiqul/vscode.nvim",
-    },
-    -- OceanicNext
-    {
-        "mhartington/oceanic-next",
-    },
-    -- tokyonight
-    {
-        "folke/tokyonight.nvim",
-    },
-    -- codedark
-    {
-        "tomasiser/vim-code-dark",
-    },
-    -- nightfly
-    {
-        "bluz71/vim-nightfly-colors",
-        name = "nightfly",
-    },
+    { "dracula/vim",                name = "dracula" },
+    { "olimorris/onedarkpro.nvim" }, -- onedark
+    { "Mofiqul/vscode.nvim" },
+    { "mhartington/oceanic-next" },  -- OceanicNext
+    { "folke/tokyonight.nvim" },
+    { "tomasiser/vim-code-dark" },   -- codedark
+    { "bluz71/vim-nightfly-colors", name = "nightfly" },
 
     "RRethy/vim-illuminate",
     {
