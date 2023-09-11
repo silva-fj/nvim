@@ -194,46 +194,10 @@ return {
             },
         })
 
-        local nvim_conform_filetypes = {
-            "javascript",
-            "typescript",
-            "javascriptreact",
-            "typescriptreact",
-            "css",
-            "html",
-            "json",
-            "jsonc",
-            "yaml",
-            "markdown",
-            "graphql",
-        }
-
-        local is_nvim_conform_filetype = function(filetype)
-            for _, v in ipairs(nvim_conform_filetypes) do
-                if v == filetype then
-                    return true
-                end
-            end
-
-            return false
-        end
-
-        local createFormatCommand = function(bufnr)
-            local filetype = vim.bo[bufnr].filetype
-            vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
-                if is_nvim_conform_filetype(filetype) then
-                    require("conform").format({ async = true, lsp_fallback = true })
-                elseif vim.lsp.buf.format then
-                    vim.lsp.buf.format()
-                elseif vim.lsp.buf.formatting then
-                    vim.lsp.buf.formatting()
-                end
-            end, { desc = "Format current buffer" })
-        end
-
-
         local set_mappings = function(bufnr)
-            createFormatCommand(bufnr)
+            vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
+                require("conform").format({ async = true, lsp_fallback = true })
+            end, { desc = "Format current buffer" })
 
             local nmap = function(keys, func, desc)
                 if desc then

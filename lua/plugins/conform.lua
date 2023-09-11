@@ -15,6 +15,8 @@ return {
             yaml = prettier,
             markdown = prettier,
             graphql = prettier,
+            go = { "gofmt" },
+            rust = { "rustfmt" },
         },
         format_on_save = { timeout_ms = 500, lsp_fallback = true },
         log_level = vim.log.levels.DEBUG,
