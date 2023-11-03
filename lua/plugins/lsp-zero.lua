@@ -130,6 +130,25 @@ return {
             },
         })
 
+        local lspconfig = require("lspconfig")
+
+        local generalLsCapabilities = function()
+            local capabilities = vim.lsp.protocol.make_client_capabilities()
+            capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+            return capabilities
+        end
+
+        lsp.configure("sqlls", {
+            cmd = { "sql-language-server", "up", "--method", "stdio" },
+            root_dir = lspconfig.util.root_pattern(".git", vim.fn.getcwd()),
+            filetypes = { "sql" },
+        })
+
+        lsp.configure("html", {
+            capabilities = generalLsCapabilities(),
+        })
+
         lsp.configure("tsserver", {
             on_attach = function(client)
                 client.server_capabilities.documentFormattingProvider = false
@@ -137,12 +156,6 @@ return {
             end,
         })
 
-        local jsonlsCapabilities = function()
-            local capabilities = vim.lsp.protocol.make_client_capabilities()
-            capabilities.textDocument.completion.completionItem.snippetSupport = true
-
-            return capabilities
-        end
 
         lsp.configure("tailwindcss", {
             settings = {
@@ -161,7 +174,7 @@ return {
                 client.server_capabilities.documentFormattingProvider = false
                 client.server_capabilities.documentRangeFormattingProvider = false
             end,
-            capabilities = jsonlsCapabilities(),
+            capabilities = generalLsCapabilities(),
             settings = {
                 json = {
                     -- Schemas https://www.schemastore.org
