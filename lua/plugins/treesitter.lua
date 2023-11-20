@@ -20,10 +20,6 @@ return {
             --     enable = true,
             -- },
             ignore_install = { "vala", "swift" },
-            context_commentstring = {
-                enable = true,
-                enable_autocmd = false,
-            },
         })
     end,
 }
