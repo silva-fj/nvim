@@ -57,6 +57,7 @@ return {
             "tsserver",
             "eslint",
             "lua_ls",
+            "gopls",
         })
 
         local cmp = require("cmp")
