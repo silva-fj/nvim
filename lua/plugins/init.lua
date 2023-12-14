@@ -2,19 +2,31 @@ return {
     -- Colorschemes
     {
         "ellisonleao/gruvbox.nvim",
-        lazy = false,    -- make sure we load this during startup if it is your main colorscheme
-        priority = 1000, -- make sure to load this before all the other start plugins
-        config = function()
-            vim.cmd.colorscheme("gruvbox")
-        end,
     },
-    { "dracula/vim",                name = "dracula" },
+    { "dracula/vim",              name = "dracula" },
     { "olimorris/onedarkpro.nvim" }, -- onedark
     { "Mofiqul/vscode.nvim" },
     { "mhartington/oceanic-next" },  -- OceanicNext
     { "folke/tokyonight.nvim" },
     { "tomasiser/vim-code-dark" },   -- codedark
-    { "bluz71/vim-nightfly-colors", name = "nightfly" },
+    {
+        "bluz71/vim-nightfly-colors",
+        name = "nightfly",
+
+    },
+    {
+        "catppuccin/nvim",
+        name = "catppuccin",
+    },
+    {
+        "rebelot/kanagawa.nvim",
+        lazy = false,    -- make sure we load this during startup if it is your main colorscheme
+        priority = 1000, -- make sure to load this before all the other start plugins
+        config = function()
+            vim.cmd.colorscheme("kanagawa")
+        end,
+
+    },
 
     "RRethy/vim-illuminate",
     {
