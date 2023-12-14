@@ -7,6 +7,7 @@ return {
     config = function()
         require("lspsaga").setup({
             rename = {
+                enable = false, -- disabled for now
                 in_select = false,
                 auto_save = false,
                 project_max_width = 0.5,
