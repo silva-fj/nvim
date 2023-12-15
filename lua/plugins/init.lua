@@ -24,11 +24,7 @@ return {
     {
         "NvChad/nvim-colorizer.lua",
         config = function()
-            require("colorizer").setup({
-                -- user_default_options = {
-                -- 	tailwind = true,
-                -- },
-            })
+            require("colorizer").setup()
         end,
     },
     {
@@ -47,9 +43,6 @@ return {
             vim.keymap.set("n", "<leader>m", require("treesj").toggle)
         end,
     },
-    -- {
-    --     "airblade/vim-gitgutter",
-    -- },
     {
         'mg979/vim-visual-multi',
         branch = 'master',
