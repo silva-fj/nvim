@@ -32,18 +32,6 @@ return {
         end,
     },
     {
-        "windwp/nvim-spectre",
-        config = function()
-            require("spectre").setup()
-
-            -- Code action
-            vim.keymap.set({ "n" }, "<leader>S", "<cmd>lua require('spectre').open()<CR>")
-            vim.keymap.set("n", "<leader>SS", '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>', {
-                desc = "Search on current file",
-            })
-        end,
-    },
-    {
         "mbbill/undotree",
         keys = {
             { "<leader>u", "<cmd>UndotreeToggle<cr>", desc = "UndoTree" },
