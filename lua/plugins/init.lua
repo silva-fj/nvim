@@ -1,15 +1,6 @@
 return {
     "RRethy/vim-illuminate",
     {
-        -- Useful status updates for LSP
-        "j-hui/fidget.nvim",
-        config = function()
-            require("fidget").setup()
-        end,
-        tag = "legacy",
-        event = "LspAttach",
-    },
-    {
         "folke/trouble.nvim",
         dependencies = "nvim-tree/nvim-web-devicons",
         config = function()
