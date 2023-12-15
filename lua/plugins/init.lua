@@ -1,14 +1,6 @@
 return {
     "RRethy/vim-illuminate",
     "tpope/vim-rhubarb",
-    {
-        "folke/todo-comments.nvim",
-        dependencies = "nvim-lua/plenary.nvim",
-        config = function()
-            require("todo-comments").setup()
-        end,
-    },
-
     "christoomey/vim-tmux-navigator",
     {
         "nvim-tree/nvim-web-devicons",
