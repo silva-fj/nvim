@@ -38,7 +38,7 @@ local set_mappings = function(bufnr)
     end, "[W]orkspace [S]ymbols")
 
     -- See `:help K` for why this keymap
-    -- nmap("K", vim.lsp.buf.hover, "Hover Documentation")
+    nmap("K", vim.lsp.buf.hover, "Hover Documentation")
     nmap("<C-s>", vim.lsp.buf.signature_help, "Signature Documentation")
 
     -- Lesser used LSP functionality
