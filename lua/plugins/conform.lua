@@ -22,6 +22,12 @@ return {
         log_level = vim.log.levels.DEBUG,
     },
     config = function(_, opts)
-        require("conform").setup(opts)
+        local conform = require("conform")
+        conform.setup(opts)
+        conform.formatters.rustfmt = {
+            inherit = false,
+            command = "shfmt",
+            args = { "--edition 2021", "--emit=stdout" },
+        }
     end,
 }
