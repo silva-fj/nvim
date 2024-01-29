@@ -52,13 +52,27 @@ return {
         "williamboman/mason-lspconfig.nvim",
         "folke/neodev.nvim",
         "b0o/schemastore.nvim",
+
+        -- Rust
+        { "rust-lang/rust.vim" },
+        {
+            'mrcjkb/rustaceanvim',
+            version = '^4',
+            ft = { 'rust' },
+        },
+        {
+            'saecki/crates.nvim',
+            tag = 'stable',
+            config = function()
+                require('crates').setup()
+            end,
+        }
     },
     config = function()
         require("mason").setup()
         require("mason-lspconfig").setup({
             ensure_installed = {
                 "lua_ls",
-                "rust_analyzer",
                 "tsserver",
                 "html",
                 "jsonls",
@@ -158,5 +172,19 @@ return {
                 },
             },
         })
+
+        vim.g.rustaceanvim = {
+            -- LSP configuration
+            server = {
+                on_attach = function(client, bufnr)
+                    vim.g.rustfmt_autosave = 1
+                end,
+                settings = {
+                    -- rust-analyzer language server configuration
+                    ['rust-analyzer'] = {
+                    },
+                },
+            },
+        }
     end,
 }
