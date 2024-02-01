@@ -8,12 +8,15 @@ return {
         -- Adapters
         'nvim-neotest/neotest-jest',
         'rouge8/neotest-rust',
+        -- "marilari88/neotest-vitest",
         -- "thenbe/neotest-playwright",
     },
     config = function()
-        require("neotest").setup({
+        local neotest = require("neotest")
+        neotest.setup({
             adapters = {
                 require("neotest-jest"),
+                -- require("neotest-vitest"),
                 -- require("neotest-playwright").adapter({
                 --     options = {
                 --         persist_project_selection = true,
@@ -27,11 +30,14 @@ return {
                 -- require("neotest-foundry"),
             }
         })
-        vim.keymap.set("n", "<leader>rt", function()
-            require("neotest").run.run()
+        vim.keymap.set("n", "<leader>tt", function()
+            neotest.run.run()
         end, {})
-        vim.keymap.set("n", "<leader>rf", function()
-            require("neotest").run.run(vim.fn.expand("%"))
+        vim.keymap.set("n", "<leader>tf", function()
+            neotest.run.run(vim.fn.expand("%"))
+        end, {})
+        vim.keymap.set("n", "<leader>ts", function()
+            neotest.summary.toggle()
         end, {})
     end
 }
