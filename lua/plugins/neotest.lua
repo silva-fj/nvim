@@ -8,6 +8,7 @@ return {
         -- Adapters
         'nvim-neotest/neotest-jest',
         'rouge8/neotest-rust',
+        'llllvvuu/neotest-foundry',
         -- "marilari88/neotest-vitest",
         -- "thenbe/neotest-playwright",
     },
@@ -27,7 +28,7 @@ return {
                 require("neotest-rust") {
                     args = { "--no-capture" },
                 },
-                -- require("neotest-foundry"),
+                require('neotest-foundry')
             }
         })
         vim.keymap.set("n", "<leader>tt", function()
