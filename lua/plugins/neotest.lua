@@ -7,7 +7,7 @@ return {
 
         -- Adapters
         'nvim-neotest/neotest-jest',
-        'rouge8/neotest-rust',
+        -- 'rouge8/neotest-rust',
         'llllvvuu/neotest-foundry',
         -- "marilari88/neotest-vitest",
         -- "thenbe/neotest-playwright",
@@ -25,9 +25,10 @@ return {
                 --     }
                 -- }),
                 -- require("neotest-go"),
-                require("neotest-rust") {
-                    args = { "--no-capture" },
-                },
+                -- require("neotest-rust") {
+                --     args = { "--no-capture" },
+                -- },
+                require('rustaceanvim.neotest'),
                 require('neotest-foundry')
             }
         })
