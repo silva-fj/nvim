@@ -10,7 +10,7 @@ return {
                     "rust", "typescript", "tsx", "css", "graphql", "html", "javascript", "lua", "scss", "vim", "go",
                     "yaml",
                     "toml", "terraform", "svelte", "sql", "json", "gitignore", "diff", "git_rebase", "gitcommit",
-                    "dockerfile", "dart", "cmake", "bash", "http"
+                    "dockerfile", "dart", "cmake", "bash", "http", "markdown", "markdown_inline",
                 },
                 sync_install = false,
                 auto_install = true,
