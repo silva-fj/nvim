@@ -47,4 +47,10 @@ return {
         'mg979/vim-visual-multi',
         branch = 'master',
     },
+    {
+        "vhyrro/luarocks.nvim",
+        config = function()
+            require("luarocks").setup({})
+        end,
+    },
 }
