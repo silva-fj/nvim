@@ -25,7 +25,7 @@ return {
                 },
                 submit_prompt = {
                     normal = '<CR>',
-                    insert = nil
+                    insert = '<C-m>'
                 },
                 accept_diff = {
                     normal = '<C-y>',
