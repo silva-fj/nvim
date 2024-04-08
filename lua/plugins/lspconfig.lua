@@ -56,27 +56,27 @@ return {
             'mrcjkb/rustaceanvim',
             version = '^4',
             ft = { 'rust' },
-            init = function()
-                -- Configure rustaceanvim here
-                vim.g.rustaceanvim = {
-                    server = {
-                        default_settings = {
-                            -- rust-analyzer language server configuration
-                            ['rust-analyzer'] = {
-                                trace = {
-                                    server = "verbose",
-                                },
-                                server = {
-                                    extraEnv = { RA_LOG = "project_model=debug" },
-                                },
-                                checkOnSave = {
-                                    command = "clippy",
-                                },
-                            },
-                        },
-                    },
-                }
-            end,
+            -- init = function()
+            --     -- Configure rustaceanvim here
+            --     vim.g.rustaceanvim = {
+            --         server = {
+            --             default_settings = {
+            --                 -- rust-analyzer language server configuration
+            --                 ['rust-analyzer'] = {
+            --                     trace = {
+            --                         server = "verbose",
+            --                     },
+            --                     server = {
+            --                         extraEnv = { RA_LOG = "project_model=debug" },
+            --                     },
+            --                     checkOnSave = {
+            --                         command = "clippy",
+            --                     },
+            --                 },
+            --             },
+            --         },
+            --     }
+            -- end,
         },
         {
             'saecki/crates.nvim',
