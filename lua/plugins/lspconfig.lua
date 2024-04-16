@@ -42,6 +42,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
         nmap("<leader>wl", function()
             print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
         end, "[W]orkspace [L]ist Folders")
+
+        nmap("<leader>th", function()
+            vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled())
+        end, "Toggle inlay hints")
     end,
 })
 
