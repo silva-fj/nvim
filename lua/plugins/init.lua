@@ -47,4 +47,5 @@ return {
         'mg979/vim-visual-multi',
         branch = 'master',
     },
+    { 'nvim-telescope/telescope-ui-select.nvim' },
 }
