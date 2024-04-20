@@ -59,8 +59,8 @@ return {
 
         -- Diagnostic jump
         -- You can use <C-o> to jump back to your previous location
-        keymap("n", "[g", "<cmd>Lspsaga diagnostic_jump_prev<CR>")
-        keymap("n", "]g", "<cmd>Lspsaga diagnostic_jump_next<CR>")
+        keymap("n", "[d", "<cmd>Lspsaga diagnostic_jump_prev<CR>")
+        keymap("n", "]d", "<cmd>Lspsaga diagnostic_jump_next<CR>")
 
         -- Hover Doc
         -- If there is no hover doc,
