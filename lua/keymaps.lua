@@ -25,3 +25,8 @@ map("n", "n", "nzz", options)
 map("n", "n", "nzzzv", options)
 map("n", "N", "Nzzzv", options)
 map("n", "J", " mzJ`z", options)
+
+vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+
+-- Clear highlight on pressing <Esc> in normal mode
+vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
