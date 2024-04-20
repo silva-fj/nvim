@@ -17,7 +17,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
         nmap("ff", "<cmd>Format<CR>", "[F]ormat [F]ile")
         -- nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
-        -- nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
+        vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action,
+            { buffer = bufnr, desc = "LSP: [C]ode [A]ction" })
         nmap("gd", vim.lsp.buf.definition, "[G]oto [D]efinition")
         nmap("gr", function()
             require("telescope.builtin").lsp_references({ layout_strategy = "vertical" })
@@ -44,7 +45,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         end, "[W]orkspace [L]ist Folders")
 
         nmap("<leader>th", function()
-            vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled())
+            vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
         end, "Toggle inlay hints")
     end,
 })
