@@ -1,9 +1,17 @@
 return {
     "nvim-telescope/telescope.nvim",
+    event = 'VimEnter',
     version = "0.1.X",
     dependencies = {
         "nvim-lua/plenary.nvim",
-        { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+        {
+            "nvim-telescope/telescope-fzf-native.nvim",
+            build = "make",
+            cond = function()
+                return vim.fn.executable 'make' == 1
+            end,
+        },
+        { 'nvim-telescope/telescope-ui-select.nvim' },
     },
     config = function()
         require("telescope").setup({
@@ -15,8 +23,14 @@ return {
                     vertical = { width = 0.8 },
                 },
             },
+            extensions = {
+                ['ui-select'] = {
+                    require('telescope.themes').get_dropdown(),
+                },
+            },
         })
-        require("telescope").load_extension("fzf")
+        pcall(require('telescope').load_extension, 'fzf')
+        pcall(require('telescope').load_extension, 'ui-select')
 
         -- See `:help telescope.builtin`
         local builtin = require("telescope.builtin")
@@ -68,7 +82,16 @@ return {
             builtin.live_grep({ layout_strategy = "vertical" })
         end, { desc = "[S]earch by [G]rep" })
 
-        vim.keymap.set("n", "<leader>b", function()
+        vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord in Buffer' })
+
+        vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
+
+        vim.keymap.set("n", "<Leader>spw", function()
+            local word = vim.fn.expand("<cword>")
+            builtin.grep_string({ search = word, layout_strategy = "vertical" })
+        end)
+
+        vim.keymap.set("n", "<leader><space>", function()
             builtin.buffers({ layout_strategy = "vertical" })
         end, { desc = "[ ] Find existing buffers" })
 
@@ -87,7 +110,6 @@ return {
         vim.keymap.set("n", "<leader>/", function()
             -- You can pass additional configuration to telescope to change theme, layout, etc.
             builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
-                winblend = 10,
                 previewer = false,
             }))
         end, { desc = "[/] Fuzzily search in current buffer]" })
@@ -95,5 +117,10 @@ return {
         vim.keymap.set("n", "<leader>sd", function()
             require("telescope.builtin").diagnostics({ layout_strategy = "vertical" })
         end, { desc = "[S]earch [D]iagnostics" })
+
+        -- Shortcut for searching your Neovim configuration files
+        vim.keymap.set('n', '<leader>sn', function()
+            builtin.find_files { cwd = vim.fn.stdpath 'config' }
+        end, { desc = '[S]earch [N]eovim files' })
     end,
 }
