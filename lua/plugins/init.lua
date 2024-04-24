@@ -9,11 +9,6 @@ return {
         end,
     },
     {
-        "nvim-lualine/lualine.nvim",
-        dependencies = { "nvim-tree/nvim-web-devicons", lazy = true },
-        config = true,
-    },
-    {
         "goolord/alpha-nvim",
         dependencies = { "nvim-tree/nvim-web-devicons" },
         config = function()
