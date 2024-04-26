@@ -8,7 +8,7 @@ return {
             { "nvim-telescope/telescope.nvim" }
         },
         opts = {
-            debug = true, -- Enable debugging
+            debug = false, -- Enable debugging
             -- default mappings
             mappings = {
                 complete = {
