@@ -22,7 +22,7 @@ set.showmode = false
 set.undofile = true
 
 vim.opt.breakindent = true
-vim.opt.clipboard = "unnamedplus"
+vim.opt.clipboard = { "unnamed", "unnamedplus" }
 vim.opt.wildignore = { "*/temp/*", "*.so", "*.zip", "*/node_modules/*", "*/vendor/bundle/*", "*/vendor/*" }
 vim.opt.hlsearch = true
 -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
