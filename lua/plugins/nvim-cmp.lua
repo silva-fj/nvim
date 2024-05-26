@@ -21,8 +21,6 @@ return {
             "L3MON4D3/LuaSnip",
             version = "V2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
             config = function()
-                require("luasnip.loaders.from_vscode").lazy_load()
-
                 vim.cmd([[
                       " Expand
                       imap <expr> <A-j>   luasnip#expandable()  ? '<Plug>luasnip-expand-snippet' : '<C-j>'
@@ -93,6 +91,13 @@ return {
                         select = false,
                     }),
                 }),
+                ['<C-k>'] = function()
+                    if cmp.visible_docs() then
+                        cmp.close_docs()
+                    else
+                        cmp.open_docs()
+                    end
+                end
             }),
             sources = {
                 { name = 'nvim_lsp' },
@@ -117,6 +122,11 @@ return {
             },
             experimental = {
                 ghost_text = false, -- this feature conflict with copilot.vim's preview.
+            },
+            view = {
+                docs = {
+                    auto_open = false
+                }
             },
 
         })
