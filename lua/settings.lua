@@ -29,13 +29,13 @@ vim.opt.hlsearch = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 -- Decrease update time
-vim.opt.updatetime = 250
+-- vim.opt.updatetime = 250
 -- Decrease mapped sequence wait time
-vim.opt.timeoutlen = 300
+-- vim.opt.timeoutlen = 500
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = 'split'
 -- Show which line your cursor is on
-vim.opt.cursorline = true
+vim.opt.cursorline = false
 
 -- disable netrw
 -- vim.g.loaded_netrw = 1
