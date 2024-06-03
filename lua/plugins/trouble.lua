@@ -1,20 +1,27 @@
 return {
     "folke/trouble.nvim",
     dependencies = "nvim-tree/nvim-web-devicons",
-    config = function()
-        require("trouble").setup()
-        vim.api.nvim_set_keymap(
-            "n",
-            "<leader>ge",
-            "<cmd>Trouble document_diagnostics<cr>",
-            { silent = true, noremap = true }
-        )
-        vim.api.nvim_set_keymap(
-            "n",
+    cmd = "Trouble",
+    keys = {
+        {
             "<leader>gE",
-            "<cmd>Trouble workspace_diagnostics<cr>",
-            { silent = true, noremap = true }
-        )
-        vim.api.nvim_set_keymap("n", "gr", "<cmd>Trouble lsp_references<cr>", { silent = true, noremap = true })
-    end,
+            "<cmd>Trouble diagnostics toggle<cr>",
+            desc = "Diagnostics (Trouble)",
+        },
+        {
+            "<leader>ge",
+            "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+            desc = "Buffer Diagnostics (Trouble)",
+        },
+        {
+            "<leader>cs",
+            "<cmd>Trouble symbols toggle focus=false<cr>",
+            desc = "Symbols (Trouble)",
+        },
+        {
+            "<leader>gr",
+            "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+            desc = "LSP Definitions / references / ... (Trouble)",
+        },
+    },
 }
