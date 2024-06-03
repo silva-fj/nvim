@@ -84,7 +84,7 @@ return {
 
         vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord in Buffer' })
 
-        vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
+        -- vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
 
         vim.keymap.set("n", "<Leader>spw", function()
             local word = vim.fn.expand("<cword>")
