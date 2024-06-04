@@ -108,7 +108,6 @@ return {
                 "cssls",
                 "cssmodules_ls",
                 "rust_analyzer",
-                "codelldb",
             },
             automatic_installation = true,
             handlers = {
