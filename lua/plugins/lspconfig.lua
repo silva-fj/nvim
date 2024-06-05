@@ -61,27 +61,57 @@ return {
             'mrcjkb/rustaceanvim',
             version = '^4',
             ft = { 'rust' },
-            -- init = function()
-            --     -- Configure rustaceanvim here
-            --     vim.g.rustaceanvim = {
-            --         server = {
-            --             default_settings = {
-            --                 -- rust-analyzer language server configuration
-            --                 ['rust-analyzer'] = {
-            --                     trace = {
-            --                         server = "verbose",
-            --                     },
-            --                     server = {
-            --                         extraEnv = { RA_LOG = "project_model=debug" },
-            --                     },
-            --                     checkOnSave = {
-            --                         command = "clippy",
-            --                     },
-            --                 },
-            --             },
-            --         },
-            --     }
-            -- end,
+            init = function()
+                -- Configure rustaceanvim here
+                vim.g.rustaceanvim = {
+                    server = {
+                        default_settings = {
+                            -- rust-analyzer language server configuration
+                            ['rust-analyzer'] = {
+                                rust = {
+                                    analyzerTargetDir = "target/nvim-rust-analyzer",
+                                },
+                                trace = {
+                                    server = "verbose",
+                                },
+                                server = {
+                                    extraEnv = {
+                                        RA_LOG = "project_model=debug",
+                                        ["CHALK_OVERFLOW_DEPTH"] = "100000000",
+                                        ["CHALK_SOLVER_MAX_SIZE"] = "100000000",
+                                    },
+                                },
+                                cargo = {
+                                    -- Check feature-gated code
+                                    features = "all",
+                                    extraEnv = {
+                                        -- Skip building WASM, there is never need for it here
+                                        ["SKIP_WASM_BUILD"] = "1",
+                                    },
+                                },
+                                procMacro = {
+                                    -- Don't expand some problematic proc_macros
+                                    ignored = {
+                                        ["async-trait"] = { "async_trait" },
+                                        ["napi-derive"] = { "napi" },
+                                        ["async-recursion"] = { "async_recursion" },
+                                        ["async-std"] = { "async_std" },
+                                    },
+                                },
+                                -- rustfmt = {
+                                -- Use nightly formatting.
+                                -- See the polkadot-sdk CI job that checks formatting for the current version used in
+                                -- polkadot-sdk.
+                                -- extraArgs = { "+nightly-2024-04-10" },
+                                -- },
+                                -- checkOnSave = {
+                                --     command = "clippy",
+                                -- },
+                            },
+                        },
+                    },
+                }
+            end,
         },
         {
             'saecki/crates.nvim',
