@@ -71,12 +71,12 @@ return {
                                 rust = {
                                     analyzerTargetDir = "target/nvim-rust-analyzer",
                                 },
-                                trace = {
-                                    server = "verbose",
-                                },
+                                -- trace = {
+                                --     server = "verbose",
+                                -- },
                                 server = {
                                     extraEnv = {
-                                        RA_LOG = "project_model=debug",
+                                        -- RA_LOG = "project_model=debug",
                                         ["CHALK_OVERFLOW_DEPTH"] = "100000000",
                                         ["CHALK_SOLVER_MAX_SIZE"] = "100000000",
                                     },
@@ -87,6 +87,35 @@ return {
                                     extraEnv = {
                                         -- Skip building WASM, there is never need for it here
                                         ["SKIP_WASM_BUILD"] = "1",
+                                    },
+                                    buildScripts = {
+                                        overrideCommand = {
+                                            "cargo",
+                                            "remote",
+                                            "--build-env",
+                                            "SKIP_WASM_BUILD=1",
+                                            "--",
+                                            "check",
+                                            "--message-format=json",
+                                            "--all-targets",
+                                            "--all-features",
+                                            "--target-dir=target/rust-analyzer"
+                                        },
+                                    },
+                                    check = {
+                                        overrideCommand = {
+                                            "cargo",
+                                            "remote",
+                                            "--build-env",
+                                            "SKIP_WASM_BUILD=1",
+                                            "--",
+                                            "check",
+                                            "--workspace",
+                                            "--message-format=json",
+                                            "--all-targets",
+                                            "--all-features",
+                                            "--target-dir=target/rust-analyzer"
+                                        },
                                     },
                                 },
                                 procMacro = {
