@@ -1,7 +1,7 @@
 local set = vim.o
 
 set.autowrite = true
-set.scrolloff = 10
+set.scrolloff = 4
 set.si = true
 set.expandtab = true
 set.shiftwidth = 4
