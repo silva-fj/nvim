@@ -16,7 +16,6 @@ set.termguicolors = true
 set.backup = false
 set.writebackup = false
 set.signcolumn = "yes"
-set.cmdheight = 1
 set.mouse = "a"
 set.showmode = false
 set.undofile = true
