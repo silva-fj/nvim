@@ -1,6 +1,5 @@
 return {
     "RRethy/vim-illuminate",
-    "tpope/vim-rhubarb",
     "christoomey/vim-tmux-navigator",
     {
         "nvim-tree/nvim-web-devicons",
