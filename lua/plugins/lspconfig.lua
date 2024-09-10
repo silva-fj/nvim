@@ -155,7 +155,7 @@ return {
         require("mason-lspconfig").setup({
             ensure_installed = {
                 "lua_ls",
-                "tsserver",
+                "ts_ls",
                 "html",
                 "jsonls",
                 "eslint",
@@ -190,7 +190,7 @@ return {
             return capabilities
         end
 
-        lspconfig.tsserver.setup({
+        lspconfig.ts_ls.setup({
             settings = {
                 typescript = {
                     inlayHints = {
