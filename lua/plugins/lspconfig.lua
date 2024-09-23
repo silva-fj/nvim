@@ -16,7 +16,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         end, { desc = "Format current buffer" })
 
         nmap("ff", "<cmd>Format<CR>", "[F]ormat [F]ile")
-        -- nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
+        nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
         vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action,
             { buffer = bufnr, desc = "LSP: [C]ode [A]ction" })
         nmap("gd", vim.lsp.buf.definition, "[G]oto [D]efinition")
