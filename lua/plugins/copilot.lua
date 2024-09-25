@@ -7,5 +7,6 @@ return {
                imap <silent> <C-y> <Plug>(copilot-previous)
                let g:copilot_no_tab_map = v:true
             ]])
+        require('avante_lib').load()
     end,
 }
