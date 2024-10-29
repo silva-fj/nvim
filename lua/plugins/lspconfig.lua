@@ -59,7 +59,8 @@ return {
         "b0o/schemastore.nvim",
         {
             'mrcjkb/rustaceanvim',
-            version = '^4',
+            version = '^5',
+            lazy = false,
             ft = { 'rust' },
             init = function()
                 -- Configure rustaceanvim here
@@ -146,7 +147,7 @@ return {
             'saecki/crates.nvim',
             tag = 'stable',
             config = function()
-                require('crates').setup()
+                require('crates').setup({})
             end,
         }
     },
