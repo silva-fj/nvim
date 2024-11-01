@@ -8,6 +8,7 @@ return {
             { "nvim-telescope/telescope.nvim" }
         },
         opts = {
+            model = "gpt-4o-2024-08-06",
             debug = false, -- Enable debugging
             -- default mappings
             mappings = {
