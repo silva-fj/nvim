@@ -8,12 +8,15 @@ return {
             { "nvim-telescope/telescope.nvim" }
         },
         opts = {
+            highlight_headers = false,
+            separator = '---',
+            error_header = '> [!ERROR] Error',
             model = "gpt-4o-2024-08-06",
             debug = false, -- Enable debugging
             -- default mappings
+            -- default mappings
             mappings = {
                 complete = {
-                    detail = 'Use @<Tab> or /<Tab> for options.',
                     insert = '<Tab>',
                 },
                 close = {
@@ -22,15 +25,23 @@ return {
                 },
                 reset = {
                     normal = '<C-l>',
-                    insert = '<C-r>'
+                    insert = '<C-l>'
                 },
                 submit_prompt = {
                     normal = '<CR>',
-                    insert = '<C-CR>'
+                    insert = '<C-s>'
+                },
+                toggle_sticky = {
+                    detail = 'Makes line under cursor sticky or deletes sticky line.',
+                    normal = 'gr',
                 },
                 accept_diff = {
                     normal = '<C-y>',
                     insert = '<C-y>'
+                },
+                yank_diff = {
+                    normal = 'gy',
+                    register = '"',
                 },
                 show_diff = {
                     normal = 'gd'
