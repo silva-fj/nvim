@@ -11,7 +11,7 @@ return {
             highlight_headers = false,
             separator = '---',
             error_header = '> [!ERROR] Error',
-            model = "gpt-4o-2024-08-06",
+            model = "gpt-4o",
             debug = false, -- Enable debugging
             -- default mappings
             -- default mappings
