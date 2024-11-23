@@ -13,7 +13,7 @@ return {
             error_header = '> [!ERROR] Error',
             model = "gpt-4o",
             debug = false, -- Enable debugging
-            -- default mappings
+            chat_autocomplete = false,
             -- default mappings
             mappings = {
                 complete = {
