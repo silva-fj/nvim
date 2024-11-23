@@ -74,7 +74,7 @@ return {
             -- Generate commit message for staged changes
             {
                 "<leader>cpc",
-                "<cmd>CopilotChatCommitStaged<cr>",
+                "<cmd>CopilotChatCommit<cr>",
                 desc = "CopilotChat - Generate commit message for staged changes",
             },
             -- Show prompts actions with telescope
