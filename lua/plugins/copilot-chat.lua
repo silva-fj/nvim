@@ -1,3 +1,6 @@
+# remove this after upgrading neovim to 0.11.0+
+vim.o.completeopt = "menu,preview,noinsert,popup"
+
 return {
     {
         "CopilotC-Nvim/CopilotChat.nvim",
@@ -13,46 +16,7 @@ return {
             error_header = '> [!ERROR] Error',
             model = "gpt-4o",
             debug = false, -- Enable debugging
-            chat_autocomplete = false,
-            -- default mappings
-            mappings = {
-                complete = {
-                    insert = '<Tab>',
-                },
-                close = {
-                    normal = 'q',
-                    insert = '<C-c>'
-                },
-                reset = {
-                    normal = '<C-l>',
-                    insert = '<C-l>'
-                },
-                submit_prompt = {
-                    normal = '<CR>',
-                    insert = '<C-s>'
-                },
-                toggle_sticky = {
-                    detail = 'Makes line under cursor sticky or deletes sticky line.',
-                    normal = 'gr',
-                },
-                accept_diff = {
-                    normal = '<C-y>',
-                    insert = '<C-y>'
-                },
-                yank_diff = {
-                    normal = 'gy',
-                    register = '"',
-                },
-                show_diff = {
-                    normal = 'gd'
-                },
-                show_system_prompt = {
-                    normal = 'gp'
-                },
-                show_user_selection = {
-                    normal = 'gs'
-                },
-            },
+            chat_autocomplete = true,
         },
         keys = {
             {
