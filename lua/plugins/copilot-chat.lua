@@ -4,12 +4,12 @@ vim.o.completeopt = "menu,preview,noinsert,popup"
 return {
     {
         "CopilotC-Nvim/CopilotChat.nvim",
-        branch = "canary",
         dependencies = {
-            { "github/copilot.vim" },    -- or zbirenbaum/copilot.lua
+            { "github/copilot.vim" },
             { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
             { "nvim-telescope/telescope.nvim" }
         },
+        build = "make tiktoken",
         opts = {
             highlight_headers = false,
             separator = '---',
