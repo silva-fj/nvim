@@ -71,7 +71,7 @@ return {
         end
 
         vim.keymap.set("n", "<leader>sf", function()
-            project_files(true)
+            project_files(false)
         end, { desc = "[S]earch [P]project [F]iles (No Preview)" })
 
         vim.keymap.set("n", "<leader>?", function()
