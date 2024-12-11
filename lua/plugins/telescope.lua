@@ -27,6 +27,12 @@ return {
                 ['ui-select'] = {
                     require('telescope.themes').get_dropdown(),
                 },
+                fzf = {
+                    fuzzy = true, -- false will only do exact matching
+                    override_generic_sorter = true,
+                    override_file_sorter = true,
+                    case_mode = "smart_case",
+                },
             },
         })
         pcall(require('telescope').load_extension, 'fzf')
