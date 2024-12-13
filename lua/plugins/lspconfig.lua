@@ -72,6 +72,11 @@ return {
                                 rust = {
                                     analyzerTargetDir = "target/nvim-rust-analyzer",
                                 },
+                                diagnostics = {
+                                    disabled = {
+                                        "macro-error",
+                                    },
+                                },
                                 -- trace = {
                                 --     server = "verbose",
                                 -- },
