@@ -98,7 +98,7 @@ return {
         end)
 
         vim.keymap.set("n", "<leader><space>", function()
-            builtin.buffers({ layout_strategy = "vertical" })
+            builtin.buffers(no_preview())
         end, { desc = "[ ] Find existing buffers" })
 
         vim.keymap.set("n", "<leader>fh", function()
