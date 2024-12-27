@@ -14,7 +14,7 @@ return {
             highlight_headers = false,
             separator = '---',
             error_header = '> [!ERROR] Error',
-            model = "gpt-4o",
+            model = "o1",
             debug = false, -- Enable debugging
             chat_autocomplete = true,
         },
