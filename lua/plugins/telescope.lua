@@ -14,10 +14,15 @@ return {
         { 'nvim-telescope/telescope-ui-select.nvim' },
     },
     config = function()
+        -- See `:help telescope.builtin`
+        local builtin = require("telescope.builtin")
+        local themes = require("telescope.themes")
+        local actions = require("telescope.actions")
+
         require("telescope").setup({
             defaults = {
                 mappings = {
-                    i = { ["<esc>"] = require("telescope.actions").close },
+                    i = { ["<esc>"] = actions.close },
                 },
                 layout_config = {
                     vertical = { width = 0.8 },
@@ -25,7 +30,7 @@ return {
             },
             extensions = {
                 ['ui-select'] = {
-                    require('telescope.themes').get_dropdown(),
+                    themes.get_dropdown(),
                 },
                 fzf = {
                     fuzzy = true, -- false will only do exact matching
@@ -38,40 +43,37 @@ return {
         pcall(require('telescope').load_extension, 'fzf')
         pcall(require('telescope').load_extension, 'ui-select')
 
-        -- See `:help telescope.builtin`
-        local builtin = require("telescope.builtin")
+        -- local dropdown_with_previewer = function(with_previewer)
+        --     return themes.get_dropdown({
+        --         borderchars = {
+        --             { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
+        --             prompt = { "─", "│", " ", "│", "┌", "┐", "│", "│" },
+        --             results = { "─", "│", "─", "│", "├", "┤", "┘", "└" },
+        --             preview = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
+        --         },
+        --         width = 0.8,
+        --         previewer = with_previewer,
+        --         prompt_prefix = "🔍 ",
+        --     })
+        -- end
 
-        local no_preview = function()
-            return require("telescope.themes").get_dropdown({
-                borderchars = {
-                    { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
-                    prompt = { "─", "│", " ", "│", "┌", "┐", "│", "│" },
-                    results = { "─", "│", "─", "│", "├", "┤", "┘", "└" },
-                    preview = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
-                },
-                width = 0.8,
-                previewer = false,
-                prompt_prefix = "🔍 ",
-            })
-        end
-
-        local project_files = function(preview)
+        local project_files = function(previewer)
             local opts = {
-                -- layout_strategy = "vertical",
+                layout_strategy = "vertical",
                 prompt_prefix = "🔍 ",
             }
             vim.fn.system("git rev-parse --is-inside-work-tree")
             if vim.v.shell_error == 0 then
-                if preview == true then
-                    require("telescope.builtin").git_files(opts)
+                if previewer == true then
+                    builtin.git_files(opts)
                 else
-                    require("telescope.builtin").git_files(no_preview())
+                    builtin.git_files(themes.get_ivy({ previewer = false }))
                 end
             else
-                if preview == true then
-                    require("telescope.builtin").find_files(opts)
+                if previewer == true then
+                    builtin.find_files(opts)
                 else
-                    require("telescope.builtin").find_files(no_preview())
+                    builtin.find_files(themes.get_ivy({ previewer = false }))
                 end
             end
         end
@@ -98,7 +100,8 @@ return {
         end)
 
         vim.keymap.set("n", "<leader><space>", function()
-            builtin.buffers(no_preview())
+            -- builtin.buffers(dropdown_with_preview(false))
+            builtin.buffers(themes.get_ivy({ previewer = false }))
         end, { desc = "[ ] Find existing buffers" })
 
         vim.keymap.set("n", "<leader>fh", function()
@@ -115,13 +118,11 @@ return {
 
         vim.keymap.set("n", "<leader>/", function()
             -- You can pass additional configuration to telescope to change theme, layout, etc.
-            builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
-                previewer = false,
-            }))
+            builtin.current_buffer_fuzzy_find(themes.get_ivy({ previewer = true }))
         end, { desc = "[/] Fuzzily search in current buffer]" })
 
         vim.keymap.set("n", "<leader>sd", function()
-            require("telescope.builtin").diagnostics({ layout_strategy = "vertical" })
+            builtin.diagnostics({ layout_strategy = "vertical" })
         end, { desc = "[S]earch [D]iagnostics" })
 
         -- Shortcut for searching your Neovim configuration files
