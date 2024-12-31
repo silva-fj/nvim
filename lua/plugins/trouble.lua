@@ -10,7 +10,7 @@ return {
         },
         {
             "<leader>ge",
-            "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+            "<cmd>Trouble diagnostics toggle focus=true filter.buf=0<cr>",
             desc = "Buffer Diagnostics (Trouble)",
         },
         {
