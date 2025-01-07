@@ -4,7 +4,13 @@ return {
     ---@module 'render-markdown'
     ---@type render.md.UserConfig
     opts = {
-        file_types = { 'markdown', 'copilot-chat', 'Avante' },
+        file_types = {
+            'markdown',
+            'copilot-chat',
+        },
     },
-    ft = { 'markdown', 'copilot-chat', 'Avante' },
+    ft = {
+        'markdown',
+        'copilot-chat',
+    },
 }
