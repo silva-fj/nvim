@@ -9,23 +9,24 @@ return {
         -- Adapters
         'nvim-neotest/neotest-jest',
         -- 'rouge8/neotest-rust',
-        'llllvvuu/neotest-foundry',
-        -- "marilari88/neotest-vitest",
-        -- "thenbe/neotest-playwright",
+        "llllvvuu/neotest-foundry",
+        "marilari88/neotest-vitest",
+        "thenbe/neotest-playwright",
+        "fredrikaverpil/neotest-golang",
     },
     config = function()
         local neotest = require("neotest")
         neotest.setup({
             adapters = {
                 require("neotest-jest"),
-                -- require("neotest-vitest"),
-                -- require("neotest-playwright").adapter({
-                --     options = {
-                --         persist_project_selection = true,
-                --         enable_dynamic_test_discovery = true,
-                --     }
-                -- }),
-                -- require("neotest-go"),
+                require("neotest-vitest"),
+                require("neotest-playwright").adapter({
+                    options = {
+                        persist_project_selection = true,
+                        enable_dynamic_test_discovery = true,
+                    }
+                }),
+                require("neotest-golang"),
                 -- require("neotest-rust") {
                 --     args = { "--no-capture" },
                 -- },
