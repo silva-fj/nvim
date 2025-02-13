@@ -1,3 +1,6 @@
+vim.diagnostic.config({
+    severity_sort = true,
+})
 return {
     "nvimdev/lspsaga.nvim",
     dependencies = {
@@ -57,7 +60,6 @@ return {
         -- unfocus the show_line_diagnostics floating window
         keymap("n", "<leader>dl", "<cmd>Lspsaga show_line_diagnostics<CR>")
 
-        -- Diagnostic jump
         -- You can use <C-o> to jump back to your previous location
         keymap("n", "[d", "<cmd>Lspsaga diagnostic_jump_prev<CR>")
         keymap("n", "]d", "<cmd>Lspsaga diagnostic_jump_next<CR>")
