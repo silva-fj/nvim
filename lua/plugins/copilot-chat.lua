@@ -1,6 +1,14 @@
 # remove this after upgrading neovim to 0.11.0+
 vim.o.completeopt = "menu,preview,noinsert,popup"
 
+vim.api.nvim_create_autocmd({ "BufEnter" }, {
+    pattern = 'copilot-*',
+    callback = function()
+        vim.opt_local.relativenumber = false
+        vim.opt_local.number = false
+    end,
+})
+
 return {
     {
         "CopilotC-Nvim/CopilotChat.nvim",
@@ -11,12 +19,25 @@ return {
         },
         build = "make tiktoken",
         opts = {
-            highlight_headers = false,
-            separator = '---',
-            error_header = '> [!ERROR] Error',
-            model = "o1",
+            model = "claude-3.5-sonnet",
             debug = false, -- Enable debugging
             chat_autocomplete = true,
+            highlight_headers = false,
+            question_header = '   ',
+            answer_header = '    ',
+            error_header = '>   ',
+            selection = function(source)
+                local select = require('CopilotChat.select')
+                return select.visual(source) or select.buffer(source)
+            end,
+            mappings = {
+                show_info = {
+                    normal = 'cpi',
+                },
+                show_context = {
+                    normal = 'cpc',
+                },
+            },
         },
         keys = {
             {
@@ -55,6 +76,12 @@ return {
                 "<leader>cpe",
                 "<cmd>CopilotChatExplain<cr>",
                 desc = "CopilotChat - Explain code",
+            },
+            -- Select model
+            {
+                "<leader>cpm",
+                "<cmd>CopilotChatModels<cr>",
+                desc = "CopilotChat - Select model",
             },
         },
         -- See Commands section for default commands if you want to lazy load on them
