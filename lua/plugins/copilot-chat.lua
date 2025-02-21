@@ -23,9 +23,10 @@ return {
             debug = false, -- Enable debugging
             chat_autocomplete = true,
             highlight_headers = false,
-            question_header = '   ',
-            answer_header = '    ',
-            error_header = '>   ',
+            question_header = '   User ',
+            answer_header = '   Copilot ',
+            error_header = '   ',
+            separator = '',
             selection = function(source)
                 local select = require('CopilotChat.select')
                 return select.visual(source) or select.buffer(source)
