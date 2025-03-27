@@ -1,6 +1,3 @@
-# remove this after upgrading neovim to 0.11.0+
-vim.o.completeopt = "menu,preview,noinsert,popup"
-
 vim.api.nvim_create_autocmd({ "BufEnter" }, {
     pattern = 'copilot-*',
     callback = function()
