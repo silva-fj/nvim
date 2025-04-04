@@ -29,7 +29,7 @@ return {
             preset = 'none',
             ['<C-space>'] = { 'show', 'show_documentation', 'hide_documentation' },
             ['<C-e>'] = { 'hide' },
-            ['<CR>'] = { 'select_and_accept' },
+            ['<CR>'] = { 'select_and_accept', 'fallback' },
 
             ['<Up>'] = { 'select_prev', 'fallback' },
             ['<Down>'] = { 'select_next', 'fallback' },
