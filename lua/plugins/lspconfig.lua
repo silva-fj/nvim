@@ -175,6 +175,11 @@ return {
                 "rust_analyzer",
             },
             automatic_installation = true,
+            automatic_enable = {
+                exclude = {
+                    "rust_analyzer",
+                }
+            },
             handlers = {
                 function(server_name)
                     if server_name ~= "rust_analyzer" then
