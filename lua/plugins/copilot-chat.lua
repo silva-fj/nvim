@@ -16,7 +16,7 @@ return {
         },
         build = "make tiktoken",
         opts = {
-            model = "gpt-4.1",
+            model = "claude-sonnet-4",
             debug = false, -- Enable debugging
             chat_autocomplete = true,
             highlight_headers = false,
@@ -64,8 +64,11 @@ return {
             {
                 "<leader>cpp",
                 function()
-                    local actions = require("CopilotChat.actions")
-                    require("CopilotChat.integrations.telescope").pick(actions.prompt_actions())
+                    require("CopilotChat").select_prompt({
+                        context = {
+                            "buffers",
+                        },
+                    })
                 end,
                 desc = "CopilotChat - Prompt actions",
             },
