@@ -16,7 +16,7 @@ return {
         },
         build = "make tiktoken",
         opts = {
-            model = "claude-sonnet-4",
+            model = "gpt-4.1",
             debug = false, -- Enable debugging
             chat_autocomplete = true,
             highlight_headers = false,
