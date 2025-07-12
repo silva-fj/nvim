@@ -94,35 +94,35 @@ return {
                                         -- Skip building WASM, there is never need for it here
                                         ["SKIP_WASM_BUILD"] = "1",
                                     },
-                                    buildScripts = {
-                                        overrideCommand = {
-                                            "cargo",
-                                            "remote",
-                                            "--build-env",
-                                            "SKIP_WASM_BUILD=1",
-                                            "--",
-                                            "check",
-                                            "--message-format=json",
-                                            "--all-targets",
-                                            "--all-features",
-                                            "--target-dir=target/rust-analyzer"
-                                        },
-                                    },
-                                    check = {
-                                        overrideCommand = {
-                                            "cargo",
-                                            "remote",
-                                            "--build-env",
-                                            "SKIP_WASM_BUILD=1",
-                                            "--",
-                                            "check",
-                                            "--workspace",
-                                            "--message-format=json",
-                                            "--all-targets",
-                                            "--all-features",
-                                            "--target-dir=target/rust-analyzer"
-                                        },
-                                    },
+                                    -- buildScripts = {
+                                    --     overrideCommand = {
+                                    --         "cargo",
+                                    --         "remote",
+                                    --         "--build-env",
+                                    --         "SKIP_WASM_BUILD=1",
+                                    --         "--",
+                                    --         "check",
+                                    --         "--message-format=json",
+                                    --         "--all-targets",
+                                    --         "--all-features",
+                                    --         "--target-dir=target/rust-analyzer"
+                                    --     },
+                                    -- },
+                                    -- check = {
+                                    --     overrideCommand = {
+                                    --         "cargo",
+                                    --         "remote",
+                                    --         "--build-env",
+                                    --         "SKIP_WASM_BUILD=1",
+                                    --         "--",
+                                    --         "check",
+                                    --         "--workspace",
+                                    --         "--message-format=json",
+                                    --         "--all-targets",
+                                    --         "--all-features",
+                                    --         "--target-dir=target/rust-analyzer"
+                                    --     },
+                                    -- },
                                 },
                                 procMacro = {
                                     -- Don't expand some problematic proc_macros
