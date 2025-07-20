@@ -185,6 +185,7 @@ return {
             automatic_enable = {
                 exclude = {
                     "rust_analyzer",
+                    "ts_ls",
                 }
             },
             handlers = {
