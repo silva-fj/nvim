@@ -174,7 +174,7 @@ return {
                 "eslint",
                 "vimls",
                 "yamlls",
-                -- "gopls",
+                "gopls",
                 "tailwindcss",
                 "dockerls",
                 "cssls",
@@ -196,7 +196,7 @@ return {
                         -- Set offset encoding to utf-16 to avoid multiple encoding warnings
                         capabilities.offsetEncoding = { "utf-16" }
                         capabilities = require('blink.cmp').get_lsp_capabilities(capabilities)
-                        
+
                         require("lspconfig")[server_name].setup {
                             capabilities = capabilities
                         }
