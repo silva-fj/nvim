@@ -174,7 +174,7 @@ return {
                 "eslint",
                 "vimls",
                 "yamlls",
-                "gopls",
+                -- "gopls",
                 "tailwindcss",
                 "dockerls",
                 "cssls",
