@@ -66,13 +66,6 @@ return {
                 -- Configure rustaceanvim here
                 vim.g.rustaceanvim = {
                     server = {
-                        capabilities = function()
-                            local capabilities = vim.lsp.protocol.make_client_capabilities()
-                            capabilities.textDocument.completion.completionItem.snippetSupport = true
-                            -- Set offset encoding to utf-16 to avoid multiple encoding warnings
-                            capabilities.offsetEncoding = { "utf-16" }
-                            return require('blink.cmp').get_lsp_capabilities(capabilities)
-                        end,
                         default_settings = {
                             -- rust-analyzer language server configuration
                             ['rust-analyzer'] = {
