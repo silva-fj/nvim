@@ -66,13 +66,6 @@ return {
                 -- Configure rustaceanvim here
                 vim.g.rustaceanvim = {
                     server = {
-                        capabilities = function()
-                            local capabilities = vim.lsp.protocol.make_client_capabilities()
-                            capabilities.textDocument.completion.completionItem.snippetSupport = true
-                            -- Set offset encoding to utf-16 to avoid multiple encoding warnings
-                            capabilities.offsetEncoding = { "utf-16" }
-                            return require('blink.cmp').get_lsp_capabilities(capabilities)
-                        end,
                         default_settings = {
                             -- rust-analyzer language server configuration
                             ['rust-analyzer'] = {
@@ -192,11 +185,18 @@ return {
                 function(server_name)
                     if server_name ~= "rust_analyzer" then
                         local capabilities = vim.lsp.protocol.make_client_capabilities()
-                        capabilities.textDocument.completion.completionItem.snippetSupport = true
+                        capabilities = vim.tbl_deep_extend('force', capabilities,
+                            require('blink.cmp').get_lsp_capabilities({}, false))
+                        capabilities = vim.tbl_deep_extend('force', capabilities, {
+                            textDocument = {
+                                foldingRange = {
+                                    dynamicRegistration = false,
+                                    lineFoldingOnly = true
+                                }
+                            }
+                        })
                         -- Set offset encoding to utf-16 to avoid multiple encoding warnings
-                        capabilities.offsetEncoding = { "utf-16" }
-                        capabilities = require('blink.cmp').get_lsp_capabilities(capabilities)
-
+                        -- capabilities.offsetEncoding = { "utf-16" }
                         require("lspconfig")[server_name].setup {
                             capabilities = capabilities
                         }
@@ -210,14 +210,11 @@ return {
         local generalLsCapabilities = function()
             local capabilities = vim.lsp.protocol.make_client_capabilities()
             capabilities.textDocument.completion.completionItem.snippetSupport = true
-            -- Set offset encoding to utf-16 to avoid multiple encoding warnings
-            capabilities.offsetEncoding = { "utf-16" }
 
             return require('blink.cmp').get_lsp_capabilities(capabilities)
         end
 
         lspconfig.ts_ls.setup({
-            capabilities = generalLsCapabilities(),
             settings = {
                 typescript = {
                     inlayHints = {
@@ -252,14 +249,12 @@ return {
         })
 
         lspconfig.sqlls.setup({
-            capabilities = generalLsCapabilities(),
             cmd = { "sql-language-server", "up", "--method", "stdio" },
             root_dir = lspconfig.util.root_pattern(".git", vim.fn.getcwd()),
             filetypes = { "sql" },
         })
 
         lspconfig.lua_ls.setup({
-            capabilities = generalLsCapabilities(),
             -- before_init = require("neodev.lsp").before_init,
             settings = {
                 Lua = {
@@ -271,7 +266,6 @@ return {
         })
 
         lspconfig.yamlls.setup({
-            capabilities = generalLsCapabilities(),
             settings = {
                 yaml = {
                     schemaStore = {
@@ -287,7 +281,6 @@ return {
         })
 
         lspconfig.tailwindcss.setup({
-            capabilities = generalLsCapabilities(),
             settings = {
                 tailwindCSS = {
                     experimental = {
@@ -301,11 +294,11 @@ return {
         })
 
         lspconfig.jsonls.setup({
-            capabilities = generalLsCapabilities(),
             on_attach = function(client)
                 client.server_capabilities.documentFormattingProvider = false
                 client.server_capabilities.documentRangeFormattingProvider = false
             end,
+            capabilities = generalLsCapabilities(),
             settings = {
                 json = {
                     schemas = require('schemastore').json.schemas(),
