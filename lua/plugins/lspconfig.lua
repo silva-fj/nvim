@@ -55,7 +55,6 @@ return {
     dependencies = {
         "williamboman/mason.nvim",
         "williamboman/mason-lspconfig.nvim",
-        "folke/neodev.nvim",
         "b0o/schemastore.nvim",
         {
             'mrcjkb/rustaceanvim',
@@ -179,6 +178,7 @@ return {
                 exclude = {
                     "rust_analyzer",
                     "ts_ls",
+                    "lua_ls",
                 }
             },
             handlers = {
@@ -204,7 +204,6 @@ return {
                 end,
             },
         })
-        require("neodev").setup()
         local lspconfig = require('lspconfig')
 
         local generalLsCapabilities = function()
@@ -255,11 +254,13 @@ return {
         })
 
         lspconfig.lua_ls.setup({
-            -- before_init = require("neodev.lsp").before_init,
             settings = {
                 Lua = {
-                    diagnostics = {
-                        globals = { 'vim' }
+                    -- diagnostics = {
+                    --     globals = { 'vim' }
+                    -- },
+                    workspace = {
+                        library = vim.api.nvim_get_runtime_file("", true),
                     },
                 }
             },
