@@ -50,6 +50,23 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end,
 })
 
+--- Generates the LSP client capabilities
+--- @return table
+local function default_capabilities()
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+
+    --- Setup capabilities to support utf-16, since copilot.lua only works with utf-16
+    --- this is a workaround to the limitations of copilot language server
+    capabilities = vim.tbl_deep_extend('force', capabilities, {
+        offsetEncoding = { 'utf-16' },
+        general = {
+            positionEncodings = { 'utf-16' },
+        },
+    })
+
+    return capabilities
+end
+
 return {
     "neovim/nvim-lspconfig",
     dependencies = {
@@ -65,6 +82,8 @@ return {
                 -- Configure rustaceanvim here
                 vim.g.rustaceanvim = {
                     server = {
+                        capabilities = default_capabilities(),
+                        offset_encoding = 'utf-16',
                         default_settings = {
                             -- rust-analyzer language server configuration
                             ['rust-analyzer'] = {
@@ -151,7 +170,16 @@ return {
             'saecki/crates.nvim',
             tag = 'stable',
             config = function()
-                require('crates').setup({})
+                local crates = require("crates")
+                local opts = { silent = true }
+
+                vim.keymap.set("n", "<leader>cv", crates.show_versions_popup, opts)
+                vim.keymap.set("n", "<leader>cf", crates.show_features_popup, opts)
+                vim.keymap.set("n", "<leader>cd", crates.show_dependencies_popup, opts)
+                vim.keymap.set("n", "<leader>cR", crates.open_repository, opts)
+                vim.keymap.set("n", "<leader>cD", crates.open_documentation, opts)
+
+                crates.setup({})
             end,
         }
     },
@@ -184,7 +212,7 @@ return {
             handlers = {
                 function(server_name)
                     if server_name ~= "rust_analyzer" then
-                        local capabilities = vim.lsp.protocol.make_client_capabilities()
+                        local capabilities = default_capabilities()
                         capabilities = vim.tbl_deep_extend('force', capabilities,
                             require('blink.cmp').get_lsp_capabilities({}, false))
                         capabilities = vim.tbl_deep_extend('force', capabilities, {
@@ -195,11 +223,11 @@ return {
                                 }
                             }
                         })
-                        -- Set offset encoding to utf-16 to avoid multiple encoding warnings
-                        -- capabilities.offsetEncoding = { "utf-16" }
-                        require("lspconfig")[server_name].setup {
-                            capabilities = capabilities
-                        }
+                        vim.lsp.config(server_name, {
+                            capabilities = capabilities,
+                            offset_encoding = 'utf-16',
+                        })
+                        vim.lsp.enable(server_name)
                     end
                 end,
             },
@@ -207,13 +235,13 @@ return {
         local lspconfig = require('lspconfig')
 
         local generalLsCapabilities = function()
-            local capabilities = vim.lsp.protocol.make_client_capabilities()
+            local capabilities = default_capabilities()
             capabilities.textDocument.completion.completionItem.snippetSupport = true
 
             return require('blink.cmp').get_lsp_capabilities(capabilities)
         end
 
-        lspconfig.ts_ls.setup({
+        vim.lsp.config('ts_ls', {
             settings = {
                 typescript = {
                     inlayHints = {
@@ -242,18 +270,21 @@ return {
                 },
             },
         })
+        vim.lsp.enable('ts_ls')
 
-        lspconfig.html.setup({
+        vim.lsp.config('html', {
             capabilities = generalLsCapabilities(),
         })
+        vim.lsp.enable('html')
 
-        lspconfig.sqlls.setup({
+        vim.lsp.config('sqlls', {
             cmd = { "sql-language-server", "up", "--method", "stdio" },
             root_dir = lspconfig.util.root_pattern(".git", vim.fn.getcwd()),
             filetypes = { "sql" },
         })
+        vim.lsp.enable('sqlls')
 
-        lspconfig.lua_ls.setup({
+        vim.lsp.config('lua_ls', {
             settings = {
                 Lua = {
                     workspace = {
@@ -262,8 +293,9 @@ return {
                 }
             },
         })
+        vim.lsp.enable('lua_ls')
 
-        lspconfig.yamlls.setup({
+        vim.lsp.config('yamlls', {
             settings = {
                 yaml = {
                     schemaStore = {
@@ -277,8 +309,9 @@ return {
                 }
             }
         })
+        vim.lsp.enable('yamlls')
 
-        lspconfig.tailwindcss.setup({
+        vim.lsp.config('tailwindcss', {
             settings = {
                 tailwindCSS = {
                     experimental = {
@@ -290,8 +323,9 @@ return {
             },
 
         })
+        vim.lsp.enable('tailwindcss')
 
-        lspconfig.jsonls.setup({
+        vim.lsp.config('jsonls', {
             on_attach = function(client)
                 client.server_capabilities.documentFormattingProvider = false
                 client.server_capabilities.documentRangeFormattingProvider = false
@@ -304,5 +338,6 @@ return {
                 },
             },
         })
+        vim.lsp.enable('jsonls')
     end,
 }
