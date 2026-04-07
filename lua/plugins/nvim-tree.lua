@@ -220,10 +220,6 @@ return {
                 update_cwd = false,
                 ignore_list = {},
             },
-            system_open = {
-                cmd = nil,
-                args = {},
-            },
             view = {
                 adaptive_size = true,
             },
