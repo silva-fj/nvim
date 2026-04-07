@@ -3,13 +3,27 @@ return {
         'nvim-treesitter/nvim-treesitter',
         lazy = false,
         build = ':TSUpdate',
+        init = function()
+            vim.api.nvim_create_autocmd('FileType', {
+                callback = function()
+                    pcall(vim.treesitter.start)
+                    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+                end,
+            })
+        end,
         config = function()
-            require('nvim-treesitter').install({
+            local ensure_installed = {
                 "rust", "typescript", "tsx", "css", "graphql", "html", "javascript", "lua", "scss", "vim", "go",
-                "yaml",
-                "toml", "terraform", "svelte", "sql", "json", "gitignore", "diff", "git_rebase", "gitcommit",
+                "yaml", "toml", "terraform", "svelte", "sql", "json", "gitignore", "diff", "git_rebase", "gitcommit",
                 "dockerfile", "dart", "cmake", "bash", "http", "markdown", "markdown_inline",
-            }):wait(300000) -- wait max. 5 minutes
+            }
+            local installed = require('nvim-treesitter.config').get_installed()
+            local to_install = vim.iter(ensure_installed)
+                :filter(function(p) return not vim.tbl_contains(installed, p) end)
+                :totable()
+            if #to_install > 0 then
+                require('nvim-treesitter').install(to_install)
+            end
         end,
     },
     {
